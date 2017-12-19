@@ -7,11 +7,18 @@
 //
 
 import UIKit
+import SQLite
 
 class ViewController: UIViewController {
-
+    var database: Connection!
+    var db: Bdd!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.db = Bdd()
+        // initialisation de la bdd
+        
         
         // Manipulation d'objets Pages
         let page1:Page = Page(title_pf: "Title1", content_pf:"Content1", summary_pf:"Summary1")
@@ -26,8 +33,23 @@ class ViewController: UIViewController {
         
         print(carnet1.toString())
         print(carnet2.toString())
+        
+        let insertUser =  self.db.MODEL_NAME_PAGE.insert(Expression<String>("title") <- "title_pf", Expression<String>("summary") <- "sim", Expression<String>("content") <- "cont", Expression<String>("created_at") <- "created", Expression<String>("updated_at") <- "updated")
+        
+        do {
+            //try self.db.database.run(insertUser)
+            print("page inserted")
+        } catch {
+            print(error)
+        }
+        
+       db.getListPage()
+        
     }
-
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
