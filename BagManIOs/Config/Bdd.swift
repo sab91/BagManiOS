@@ -102,51 +102,44 @@ class Bdd {
     }
     
     // Insertion d'une page dans la bdd
-    func insertPage(page: Page) {
-        let insertTable =  self.MODEL_NAME_PAGE.insert(TITLE <- page.title, SUMMARY <- page.summary, CONTENT <- page.content, CREATED_AT <- Date(), UPDATED_AT <- Date())
+    func insertPage(page: Page) -> Int {
+        let insertTable =  self.MODEL_NAME_PAGE.insert(TITLE <- page.title, SUMMARY <- page.summary, CONTENT <- page.content, CREATED_AT <- page.createdAt, UPDATED_AT <- page.updatedAt)
         
         do {
             let rowId = try self.database.run(insertTable)
             page.id = Int(rowId)
             print("new page inserted")
+
+            return Int(rowId)
         } catch {
+            
             print(error)
+            return -1
         }
-        print(page.toString())
     }
     
     
     // Insertion d'un carnet dans la base
-    func insertCarnet(carnet: Carnet) {
-        let insertTable =  self.MODEL_NAME_CARNET.insert(NAME <- carnet.name, CREATED_AT <- Date(), UPDATED_AT <- Date())
+    func insertCarnet(carnet: Carnet) -> Int {
+        let insertTable =  self.MODEL_NAME_CARNET.insert(NAME <- carnet.name, CREATED_AT <- carnet.createdAt, UPDATED_AT <- carnet.updatedAt)
         
         do {
-            try self.database.run(insertTable)
+            let rowId = try self.database.run(insertTable)
             print("new carnet inserted")
+            return Int(rowId)
         } catch {
             print(error)
+            return -1
         }
     }
     
     // Mettre à jour les données d'une page et modifier les données dans la bdd
     func updatePage(page: Page, id_p: Int) {
         
-        var queryId: Int = 0
-        var createAt = Date()
-        do {
-            let query = MODEL_NAME_PAGE.select(id, CREATED_AT).filter(id == id_p)
-            let qr = try database.prepare(query)
-            for q in qr {
-                print("id: \(q[id]), created_at: \(q[CREATED_AT])")
-                queryId = q[id]
-                createAt = q[CREATED_AT]
-            }
-        } catch {
-            print(error)
-        }
         
-        let data = self.MODEL_NAME_PAGE.filter(self.id == queryId)
-        let updateData = data.update(self.TITLE <- page.title, self.SUMMARY <- page.summary, self.CONTENT <- page.content, self.CREATED_AT <- createAt, self.UPDATED_AT <- Date())
+        
+        let data = self.MODEL_NAME_PAGE.filter(self.id == id_p)
+        let updateData = data.update(self.TITLE <- page.title, self.SUMMARY <- page.summary, self.CONTENT <- page.content, self.CREATED_AT <- page.createdAt, self.UPDATED_AT <- Date())
 
         do {
             try self.database.run(updateData)
@@ -158,30 +151,22 @@ class Bdd {
     
     
     // Mettre à jour les données d'un carnet et modifier les données dans la bdd
-//    func updateCarnet(carnet: Carnet, id_c: Int) {
-//        
-//        var queryId: Int = 0
-//        do {
-//            let query = MODEL_NAME_PAGE.select(id).filter(id == id_c)
-//            let qr = try database.prepare(query)
-//            for q in qr {
-//                //print("id: \(q[id])")
-//                queryId = q[id]
-//            }
-//        } catch {
-//            print(error)
-//        }
-//        
-//        let data = self.MODEL_NAME_CARNET.filter(self.id == queryId)
-//        let updateData = data.update(self.NAME <- carnet.name, self.CREATED_AT <- "carnet.createdAt", self.UPDATED_AT <- "carnet.updatedAt")
-//
-//        do {
-//            try self.database.run(updateData)
-//            print("User updated")
-//        } catch {
-//            print(error)
-//        }
-//    }
+    func updateCarnet(carnet: Carnet, id_c: Int) {
+        print("fonction update")
+       
+        
+        print(carnet.createdAt)
+        let data = self.MODEL_NAME_CARNET.filter(self.id == id_c)
+        let updateData = data.update(self.NAME <- carnet.name, self.CREATED_AT <- carnet.createdAt, self.UPDATED_AT <- Date())
+
+        do {
+            try self.database.run(updateData)
+            print("User updated")
+        } catch {
+            print("2")
+            print(error)
+        }
+    }
     
     
     // Supprimer une page
@@ -269,32 +254,41 @@ class Bdd {
     }
     
 
+    // Récupérer tout les carnets de la bdd
+    func getAllCarnet() {
+        //
+    }
 
 
     // Afficher le contenu de la table page
-    func getListPage() {
-        
+    func getListPage() -> [Page] {
+        var tabPage: [Page] = []
         do {
             let pages = try self.database.prepare(self.MODEL_NAME_PAGE)
             for page in pages {
-                print("id: \(page[self.id]), title: \(page[self.TITLE]), summary: \(page[self.SUMMARY]), content: \(page[self.CONTENT]), created_at: \(page[self.CREATED_AT]), updated_at: \(page[self.UPDATED_AT])")
+                tabPage.append(DAO.objectToPage(cursor: page))
+                
+//                print("id: \(page[self.id]), title: \(page[self.TITLE]), summary: \(page[self.SUMMARY]), content: \(page[self.CONTENT]), created_at: \(page[self.CREATED_AT]), updated_at: \(page[self.UPDATED_AT])")
             }
         } catch {
             print(error)
         }
+        return tabPage
     }
     
     // Afficher le contenu de la table carnet
-    func getListCarnet() {
-        
+    func getListCarnet() -> [Carnet] {
+        var tabCarnet: [Carnet] = []
         do {
             let carnets = try self.database.prepare(self.MODEL_NAME_CARNET)
             for carnet in carnets {
-                print("id: \(carnet[self.id]), name: \(carnet[self.NAME]), created_at: \(carnet[self.CREATED_AT]), updated_at: \(carnet[self.UPDATED_AT]) ")
+                tabCarnet.append(DAO.objectToCarnet(cursor: carnet))
+//                print("id: \(carnet[self.id]), name: \(carnet[self.NAME]), created_at: \(carnet[self.CREATED_AT]), updated_at: \(carnet[self.UPDATED_AT]) ")
             }
         } catch {
             print(error)
         }
+        return tabCarnet
     }
     
 

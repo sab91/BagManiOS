@@ -11,6 +11,8 @@
 		1EC4E21D1FE6D5AA0010A964 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC4E2021FE6D2F10010A964 /* SQLite.framework */; };
 		1EC4E21E1FE6D5AF0010A964 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC4E2021FE6D2F10010A964 /* SQLite.framework */; };
 		1EC4E21F1FE6D5AF0010A964 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC4E2021FE6D2F10010A964 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1EED1A411FEA8AC400B118E4 /* CarnetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED1A401FEA8AC400B118E4 /* CarnetView.swift */; };
+		1EED1A491FEAA95500B118E4 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED1A481FEAA95500B118E4 /* DAO.swift */; };
 		5580331C1FE2E6FD00F1C3A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5580331B1FE2E6FD00F1C3A2 /* AppDelegate.swift */; };
 		5580331E1FE2E6FD00F1C3A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5580331D1FE2E6FD00F1C3A2 /* ViewController.swift */; };
 		558033211FE2E6FD00F1C3A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5580331F1FE2E6FD00F1C3A2 /* Main.storyboard */; };
@@ -114,6 +116,8 @@
 /* Begin PBXFileReference section */
 		1EC4E1F71FE6D2F00010A964 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../../../Downloads/SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		1EC4E21A1FE6D5980010A964 /* Bdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bdd.swift; sourceTree = "<group>"; };
+		1EED1A401FEA8AC400B118E4 /* CarnetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarnetView.swift; sourceTree = "<group>"; };
+		1EED1A481FEAA95500B118E4 /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		558033181FE2E6FD00F1C3A2 /* BagManIOs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BagManIOs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5580331B1FE2E6FD00F1C3A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5580331D1FE2E6FD00F1C3A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -160,11 +164,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1E1120CB1FE820BB00742C08 /* Storyboard */ = {
+		1E1120CB1FE820BB00742C08 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1EED1A401FEA8AC400B118E4 /* CarnetView.swift */,
 			);
-			path = Storyboard;
+			path = View;
 			sourceTree = "<group>";
 		};
 		1EC4E1F81FE6D2F00010A964 /* Products */ = {
@@ -195,6 +200,7 @@
 				5580334C1FE2E7EE00F1C3A2 /* BaseModel.swift */,
 				5580334E1FE2E80200F1C3A2 /* Carnet.swift */,
 				558033501FE2E80B00F1C3A2 /* Page.swift */,
+				1EED1A481FEAA95500B118E4 /* DAO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,7 +237,7 @@
 		5580331A1FE2E6FD00F1C3A2 /* BagManIOs */ = {
 			isa = PBXGroup;
 			children = (
-				1E1120CB1FE820BB00742C08 /* Storyboard */,
+				1E1120CB1FE820BB00742C08 /* View */,
 				1EC4E2111FE6D4460010A964 /* Model */,
 				1EC4E20F1FE6D40E0010A964 /* Config */,
 				5580331B1FE2E6FD00F1C3A2 /* AppDelegate.swift */,
@@ -460,6 +466,8 @@
 				1EC4E21B1FE6D5980010A964 /* Bdd.swift in Sources */,
 				5580334F1FE2E80200F1C3A2 /* Carnet.swift in Sources */,
 				558033241FE2E6FD00F1C3A2 /* BagManIOs.xcdatamodeld in Sources */,
+				1EED1A491FEAA95500B118E4 /* DAO.swift in Sources */,
+				1EED1A411FEA8AC400B118E4 /* CarnetView.swift in Sources */,
 				558033511FE2E80B00F1C3A2 /* Page.swift in Sources */,
 				5580331E1FE2E6FD00F1C3A2 /* ViewController.swift in Sources */,
 				5580334D1FE2E7EE00F1C3A2 /* BaseModel.swift in Sources */,

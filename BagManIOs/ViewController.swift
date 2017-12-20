@@ -39,30 +39,51 @@ class ViewController: UIViewController {
 //        print(carnet2.toString())
         
         // tests insertions
-//        db.insertCarnet(carnet: carnet1)
-//        db.insertCarnet(carnet: carnet2)
-//        db.insertCarnet(carnet: carnet3)
+//        carnet1.id = db.insertCarnet(carnet: carnet1)
+//        carnet2.id = db.insertCarnet(carnet: carnet2)
+//        carnet3.id = db.insertCarnet(carnet: carnet3)
 //
-//        db.insertPage(page: page1)
-//        db.insertPage(page: page2)
-//        db.insertPage(page: page3)
+//        page1.id = db.insertPage(page: page1)
+//        page2.id = db.insertPage(page: page2)
+//        page3.id = db.insertPage(page: page3)
+
+       
         
         // tests updates
-        db.updatePage(page: page4, id_p: 1)
-//        db.updateCarnet(carnet: carnet4, id_c: 1)
+//        displayCarnet(tabCarnet: db.getListCarnet())
+//        var listPage = db.getListPage()
+//        displayPage(tabPage: listPage)
+
+//        db.updatePage(page: page3, id_p: carnet1.id)
+//        db.updateCarnet(carnet: carnet2, id_c: carnet3.id)
         
         // tests deletes
 //        db.deletePage(id_p: 1)
 //        db.deleteCarnet(id_c: 1)
+//        print("================================")
+
+//        db.getListCarnet()
         
+//        db.getListPage()
+
 //        db.deleteTables()
-        db.getListPage()
-        print("================================")
-        db.getListCarnet()
+//        db.getListPage()
+//        print("================================")
         
     }
     
+    func displayPage(tabPage: [Page]) {
+        for page in tabPage {
+            print(page.toString())
+        }
+    }
     
+    
+    func displayCarnet(tabCarnet: [Carnet]) {
+        for carnet in tabCarnet{
+            print(carnet.toString())
+        }
+    }
     
     
     override func didReceiveMemoryWarning() {
