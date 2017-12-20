@@ -30,12 +30,12 @@ class Page: BaseModel {
         super.init()
     }
     
-    init(id_pf:Int, title_pf:String, content_pf:String, summary_pf:String, createdAt_pf:Double, updatedAt_pf:Double) {
+    init(id_pf:Int, title_pf:String, content_pf:String, summary_pf:String, createdAt_pf:Date, updatedAt_pf:Date) {
         self.title = title_pf
         self.content = content_pf
         self.summary = summary_pf
         
-        super.init(createdAt: createdAt_pf, updatedAt: updatedAt_pf)
+        super.init(createdAt: 0, updatedAt: 0)
         self.id = id_pf
     }
     

@@ -19,11 +19,11 @@ class Carnet: BaseModel {
         super.init()
     }
     
-    init(id_pf:Int, name_pf:String, createdAt_pf:Double, updatedAt_pf:Double) {
+    init(id_pf:Int, name_pf:String, createdAt_pf:Date, updatedAt_pf:Date) {
         self.name = name_pf
         self.pages = [Int]()
         
-        super.init(createdAt: createdAt_pf, updatedAt: updatedAt_pf)
+        super.init(createdAt: 0, updatedAt: 0)
         self.id = id_pf
     }
     
