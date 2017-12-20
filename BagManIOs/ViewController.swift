@@ -25,6 +25,8 @@ class ViewController: UIViewController {
 
         let page2:Page = Page(title_pf: "Title2", content_pf:"Content2", summary_pf:"Summary2")
         
+        let page3:Page = Page(title_pf: "Title2", content_pf:"Content3", summary_pf:"Summary3")
+        
         print(page1.toString())
         print(page2.toString())
         
@@ -34,16 +36,13 @@ class ViewController: UIViewController {
         print(carnet1.toString())
         print(carnet2.toString())
         
-        let insertUser =  self.db.MODEL_NAME_PAGE.insert(Expression<String>("title") <- "title_pf", Expression<String>("summary") <- "sim", Expression<String>("content") <- "cont", Expression<String>("created_at") <- "created", Expression<String>("updated_at") <- "updated")
+        //db.insertCarnet(carnet: carnet1)
+        //db.insertPage(page: page2)
         
-        do {
-            //try self.db.database.run(insertUser)
-            print("page inserted")
-        } catch {
-            print(error)
-        }
+        db.deletePage(page: page3)
         
-       db.getListPage()
+        db.getListPage()
+        db.getListCarnet()
         
     }
     
