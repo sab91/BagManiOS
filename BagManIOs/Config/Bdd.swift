@@ -66,8 +66,6 @@ class Bdd {
 
     // Création de la table page
     func createPageTable() {
-
-        
         do {
             try database.run(MODEL_NAME_PAGE.create { t in
                 t.column(id, primaryKey: true)
@@ -76,7 +74,8 @@ class Bdd {
                 t.column(SUMMARY)
                 t.column(CREATED_AT)
                 t.column(UPDATED_AT)
-                t.column(CARNET_ID)
+                //Tentative de création de clé étrangère
+                t.foreignKey(CARNET_ID, references: MODEL_NAME_CARNET, id)
             })
             print("=====creation ", MODEL_NAME_PAGE)
         } catch {
@@ -279,9 +278,21 @@ class Bdd {
         }
         return tabCarnet
     }
-    
 
     
+    // Chope un objet page dans la bdd en fonction d'un id
+    // Non testée....
+    func getPageRow(pageId_pf: Int) -> Page {
+        let query = self.MODEL_NAME_PAGE.filter(id = pageId_pf)
+        return self.database.run(query)
+    }
+    
+    //Recuperation de toutes les pages appartenant au carnet précisé
+    // Non testée....
+    func getPagesByCarnet(carnetId_pf: Int) -> [Page] {
+        let query = self.MODEL_NAME_PAGE.filter(self.CARNET_ID = carnetId_pf)
+        return Array(self.database.run(query))
+    }
 }
 
 

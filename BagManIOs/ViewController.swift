@@ -22,11 +22,18 @@ class ViewController: UIViewController {
         let carnet1:Carnet = Carnet(name_pf: "Carnet1")
         carnet1.id = db.insertCarnet(carnet: carnet1)
         
+        //A tester
         let page1:Page = Page(title_pf: "Title1", content_pf:"Content1", summary_pf:"Summary1", carnetId_pf: carnet1.id)
         let page2:Page = Page(title_pf: "Title2", content_pf:"Content2", summary_pf:"Summary2", carnetId_pf: carnet1.id)
         
         page1.id = db.insertPage(page: page1)
         page2.id = db.insertPage(page: page2)
+        
+        //affichage des pages en lien avec le carnet1
+        print(carnet1.toString())
+        displayPage(tabPage: db.getPagesByCarnet(carnetId_pf: carnet1.id))
+        
+        
         
         // Manipulation d'objets Pages
         //let page1:Page = Page(title_pf: "Title1", content_pf:"Content1", summary_pf:"Summary1")
@@ -92,7 +99,6 @@ class ViewController: UIViewController {
             print(carnet.toString())
         }
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
