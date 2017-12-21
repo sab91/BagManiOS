@@ -20,7 +20,6 @@ class DAO {
 //    static let ID = Expression<Int>("id")
     
     static func objectToPage(cursor: Row) -> Page {
-         let NAME = Expression<String>("name")
          let TITLE = Expression<String>("title")
          let CONTENT = Expression<String>("content")
          let SUMMARY = Expression<String>("summary")

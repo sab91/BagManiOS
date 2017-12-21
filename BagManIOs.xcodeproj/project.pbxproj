@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E323AFE1FEC491F0059999F /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E323AFD1FEC491F0059999F /* PageView.swift */; };
 		1EC4E21B1FE6D5980010A964 /* Bdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC4E21A1FE6D5980010A964 /* Bdd.swift */; };
 		1EED1A411FEA8AC400B118E4 /* CarnetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED1A401FEA8AC400B118E4 /* CarnetView.swift */; };
 		1EED1A491FEAA95500B118E4 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED1A481FEAA95500B118E4 /* DAO.swift */; };
@@ -124,6 +125,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E323AFD1FEC491F0059999F /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		1EC4E21A1FE6D5980010A964 /* Bdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bdd.swift; sourceTree = "<group>"; };
 		1EED1A401FEA8AC400B118E4 /* CarnetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarnetView.swift; sourceTree = "<group>"; };
 		1EED1A481FEAA95500B118E4 /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
@@ -181,6 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				1EED1A401FEA8AC400B118E4 /* CarnetView.swift */,
+				1E323AFD1FEC491F0059999F /* PageView.swift */,
+				5580331D1FE2E6FD00F1C3A2 /* ViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -247,7 +251,6 @@
 				1EC4E2111FE6D4460010A964 /* Model */,
 				1EC4E20F1FE6D40E0010A964 /* Config */,
 				5580331B1FE2E6FD00F1C3A2 /* AppDelegate.swift */,
-				5580331D1FE2E6FD00F1C3A2 /* ViewController.swift */,
 				5580331F1FE2E6FD00F1C3A2 /* Main.storyboard */,
 				558033251FE2E6FD00F1C3A2 /* Assets.xcassets */,
 				558033271FE2E6FD00F1C3A2 /* LaunchScreen.storyboard */,
@@ -493,6 +496,7 @@
 				558033241FE2E6FD00F1C3A2 /* BagManIOs.xcdatamodeld in Sources */,
 				1EED1A491FEAA95500B118E4 /* DAO.swift in Sources */,
 				1EED1A411FEA8AC400B118E4 /* CarnetView.swift in Sources */,
+				1E323AFE1FEC491F0059999F /* PageView.swift in Sources */,
 				558033511FE2E80B00F1C3A2 /* Page.swift in Sources */,
 				5580331E1FE2E6FD00F1C3A2 /* ViewController.swift in Sources */,
 				5580334D1FE2E7EE00F1C3A2 /* BaseModel.swift in Sources */,

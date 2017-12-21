@@ -44,6 +44,6 @@ class Page: BaseModel {
     }
     
     override func toString() -> String {
-        return "Page \(self.id) : \(self.title) / \(self.content) / \(self.summary)"
+        return "Page \(self.id) : \(self.title) / \(self.content) / \(self.summary) / \(self.carnet_id)"
     }
 }

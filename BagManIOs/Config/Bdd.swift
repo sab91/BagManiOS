@@ -74,6 +74,7 @@ class Bdd {
                 t.column(SUMMARY)
                 t.column(CREATED_AT)
                 t.column(UPDATED_AT)
+                t.column(CARNET_ID)
                 //Tentative de création de clé étrangère
                 t.foreignKey(CARNET_ID, references: MODEL_NAME_CARNET, id)
             })
@@ -108,7 +109,7 @@ class Bdd {
         
         do {
             let rowId = try self.database.run(insertTable)
-            page.id = Int(rowId)
+            //page.id = Int(rowId)
             print("new page inserted")
             return Int(rowId)
         } catch {
@@ -283,15 +284,37 @@ class Bdd {
     // Chope un objet page dans la bdd en fonction d'un id
     // Non testée....
     func getPageRow(pageId_pf: Int) -> Page {
-        let query = self.MODEL_NAME_PAGE.filter(id = pageId_pf)
-        return self.database.run(query)
+        var page: Page = Page(title_pf: "title", content_pf: "content", summary_pf: "summary", carnetId_pf: 0)
+        do{
+            let query = try self.database.prepare(MODEL_NAME_PAGE.filter(id == pageId_pf))
+            for p in query {
+                page = DAO.objectToPage(cursor: p)
+            }
+        } catch {
+            print(error)
+        }
+        
+        return page
     }
     
     //Recuperation de toutes les pages appartenant au carnet précisé
     // Non testée....
     func getPagesByCarnet(carnetId_pf: Int) -> [Page] {
-        let query = self.MODEL_NAME_PAGE.filter(self.CARNET_ID = carnetId_pf)
-        return Array(self.database.run(query))
+        //let query = self.MODEL_NAME_PAGE.filter(self.CARNET_ID == carnetId_pf)
+        //return Array(database.run(query))
+        
+        var tabPage: [Page] = []
+        do{
+            let query = try self.database.prepare(MODEL_NAME_PAGE.filter(CARNET_ID == carnetId_pf))
+            for p in query {
+                tabPage.append(DAO.objectToPage(cursor: p))
+                //print(p)
+            }
+        } catch {
+            print(error)
+        }
+        
+        return tabPage
     }
 }
 
