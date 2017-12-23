@@ -21,6 +21,7 @@ class Bdd {
     let SUMMARY = Expression<String>("summary")
     let CREATED_AT = Expression<Date>("created_at")
     let UPDATED_AT = Expression<Date>("updated_at")
+    let CARNET_ID = Expression<Int>("carnet_id")
     let id = Expression<Int>("id")
     
     // Constructeur
@@ -65,8 +66,6 @@ class Bdd {
 
     // Création de la table page
     func createPageTable() {
-
-        
         do {
             try database.run(MODEL_NAME_PAGE.create { t in
                 t.column(id, primaryKey: true)
@@ -75,6 +74,9 @@ class Bdd {
                 t.column(SUMMARY)
                 t.column(CREATED_AT)
                 t.column(UPDATED_AT)
+                t.column(CARNET_ID)
+                //Tentative de création de clé étrangère
+                t.foreignKey(CARNET_ID, references: MODEL_NAME_CARNET, id)
             })
             print("=====creation ", MODEL_NAME_PAGE)
         } catch {
@@ -103,16 +105,14 @@ class Bdd {
     
     // Insertion d'une page dans la bdd
     func insertPage(page: Page) -> Int {
-        let insertTable =  self.MODEL_NAME_PAGE.insert(TITLE <- page.title, SUMMARY <- page.summary, CONTENT <- page.content, CREATED_AT <- page.createdAt, UPDATED_AT <- page.updatedAt)
+        let insertTable =  self.MODEL_NAME_PAGE.insert(TITLE <- page.title, SUMMARY <- page.summary, CONTENT <- page.content, CREATED_AT <- page.createdAt, UPDATED_AT <- page.updatedAt, CARNET_ID <- page.carnet_id)
         
         do {
             let rowId = try self.database.run(insertTable)
-            page.id = Int(rowId)
+            //page.id = Int(rowId)
             print("new page inserted")
-
             return Int(rowId)
         } catch {
-            
             print(error)
             return -1
         }
@@ -136,10 +136,8 @@ class Bdd {
     // Mettre à jour les données d'une page et modifier les données dans la bdd
     func updatePage(page: Page, id_p: Int) {
         
-        
-        
         let data = self.MODEL_NAME_PAGE.filter(self.id == id_p)
-        let updateData = data.update(self.TITLE <- page.title, self.SUMMARY <- page.summary, self.CONTENT <- page.content, self.CREATED_AT <- page.createdAt, self.UPDATED_AT <- Date())
+        let updateData = data.update(self.TITLE <- page.title, self.SUMMARY <- page.summary, self.CONTENT <- page.content, self.CREATED_AT <- page.createdAt, self.UPDATED_AT <- Date(), self.CARNET_ID <- page.carnet_id)
 
         do {
             try self.database.run(updateData)
@@ -252,12 +250,6 @@ class Bdd {
         }
         
     }
-    
-
-    // Récupérer tout les carnets de la bdd
-    func getAllCarnet() {
-        //
-    }
 
 
     // Afficher le contenu de la table page
@@ -267,8 +259,6 @@ class Bdd {
             let pages = try self.database.prepare(self.MODEL_NAME_PAGE)
             for page in pages {
                 tabPage.append(DAO.objectToPage(cursor: page))
-                
-//                print("id: \(page[self.id]), title: \(page[self.TITLE]), summary: \(page[self.SUMMARY]), content: \(page[self.CONTENT]), created_at: \(page[self.CREATED_AT]), updated_at: \(page[self.UPDATED_AT])")
             }
         } catch {
             print(error)
@@ -283,16 +273,49 @@ class Bdd {
             let carnets = try self.database.prepare(self.MODEL_NAME_CARNET)
             for carnet in carnets {
                 tabCarnet.append(DAO.objectToCarnet(cursor: carnet))
-//                print("id: \(carnet[self.id]), name: \(carnet[self.NAME]), created_at: \(carnet[self.CREATED_AT]), updated_at: \(carnet[self.UPDATED_AT]) ")
             }
         } catch {
             print(error)
         }
         return tabCarnet
     }
-    
 
     
+    // Chope un objet page dans la bdd en fonction d'un id
+    // Non testée....
+    func getPageRow(pageId_pf: Int) -> Page {
+        var page: Page = Page(title_pf: "title", content_pf: "content", summary_pf: "summary", carnetId_pf: 0)
+        do{
+            let query = try self.database.prepare(MODEL_NAME_PAGE.filter(id == pageId_pf))
+            for p in query {
+                page = DAO.objectToPage(cursor: p)
+            }
+        } catch {
+            print(error)
+        }
+        
+        return page
+    }
+    
+    //Recuperation de toutes les pages appartenant au carnet précisé
+    // Non testée....
+    func getPagesByCarnet(carnetId_pf: Int) -> [Page] {
+        //let query = self.MODEL_NAME_PAGE.filter(self.CARNET_ID == carnetId_pf)
+        //return Array(database.run(query))
+        
+        var tabPage: [Page] = []
+        do{
+            let query = try self.database.prepare(MODEL_NAME_PAGE.filter(CARNET_ID == carnetId_pf))
+            for p in query {
+                tabPage.append(DAO.objectToPage(cursor: p))
+                //print(p)
+            }
+        } catch {
+            print(error)
+        }
+        
+        return tabPage
+    }
 }
 
 
