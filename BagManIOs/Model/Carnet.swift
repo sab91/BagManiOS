@@ -31,8 +31,5 @@ class Carnet: BaseModel {
         return "Carnet : \(self.id) / \(self.name)"
     }
     
-//    func getCarnet() -> [Carnet] {
-//        
-//    }
     
 }

@@ -43,10 +43,10 @@ class ViewController: UIViewController {
         //let carnet4:Carnet = Carnet(name_pf: "Carnet4")
         
         // test insertions carnets
-        carnet1.id = db.insertCarnet(carnet: carnet1)
-        carnet2.id = db.insertCarnet(carnet: carnet2)
-        carnet3.id = db.insertCarnet(carnet: carnet3)
-        
+//        carnet1.id = db.insertCarnet(carnet: carnet1)
+//        carnet2.id = db.insertCarnet(carnet: carnet2)
+//        carnet3.id = db.insertCarnet(carnet: carnet3)
+//        
         //        print(carnet1.toString())
         //        print(carnet2.toString())
         
@@ -64,11 +64,11 @@ class ViewController: UIViewController {
         
         // tests insertions pages
 //
-        page1.id = db.insertPage(page: page1)
-        page2.id = db.insertPage(page: page2)
-        page3.id = db.insertPage(page: page3)
-        page4.id = db.insertPage(page: page4)
-        page5.id = db.insertPage(page: page5)
+//        page1.id = db.insertPage(page: page1)
+//        page2.id = db.insertPage(page: page2)
+//        page3.id = db.insertPage(page: page3)
+//        page4.id = db.insertPage(page: page4)
+//        page5.id = db.insertPage(page: page5)
 
        
         

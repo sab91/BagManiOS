@@ -1,50 +1,52 @@
 //
-//  CarnetView.swift
+//  PageView.swift
 //  BagManIOs
 //
-//  Created by Sabri on 20/12/2017.
+//  Created by Sabri on 21/12/2017.
 //  Copyright © 2017 utt. All rights reserved.
 //
 
 import UIKit
 import SQLite
 
-class CarnetView: UITableViewController {
-    var carnet: [Carnet] = []
+class PageListView: UITableViewController {
+    var page: [Page] = []
+    var carnet_id: Int!
     var idCarnetCell: String = "cell"
     var database: Connection!
     var db: Bdd!
-    var idCell: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.db = Bdd()
-        carnet = db.getListCarnet()
+        //carnet_id = 1
+        page = db.getPagesByCarnet(carnetId_pf: carnet_id)
+        print(page)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+//         Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     // Cette fonction permet de transmettre des données vers une autre View
     // Ici on transmet l'id du carnet pour qu'il affiche uniquement les pages avec la foreign key carnet_id correspondante
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var id = 0
-        guard let pageView = segue.destination as? PageView else {return}
-            if let cell = sender as? UITableViewCell, let title = cell.textLabel?.text {
-                do{
-                    let query = try self.db.database.prepare(db.MODEL_NAME_CARNET.filter(db.NAME == title))
-                    for q in query {
-                        id = q[db.id]
-                    }
-                } catch {
-                    print (error)
-                }
-                pageView.carnet_id = id
-            }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        var id = 0
+//        guard let pageView = segue.destination as? PageView else {return}
+//        if let cell = sender as? UITableViewCell, let title = cell.textLabel?.text {
+//            do{
+//                let query = try self.db.database.prepare(db.MODEL_NAME_PAGE.filter(db.TITLE == title))
+//                for q in query {
+//                    id = q[db.id]
+//                }
+//            } catch {
+//                print (error)
+//            }
+//            pageView.carnet_id = id
+//        }
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -60,32 +62,32 @@ class CarnetView: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return carnet.count
+        return page.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // #warning Incomplete implementation, return the number of rows
-        return "Liste des carnets"
+        return "Liste des pages"
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCarnetCell, for: indexPath)
         
-        cell.textLabel?.text = "\(carnet[indexPath.row].name)"
+        cell.textLabel?.text = "\(page[indexPath.row].title)"
         print(indexPath.section)
         print(indexPath.row)
-        cell.detailTextLabel?.text = "Dernière mis à jour le : \(carnet[indexPath.row].updatedAt)"
-//        return cell
+        cell.detailTextLabel?.text = "Dernière mis à jour le : \(page[indexPath.row].updatedAt)"
+        //        return cell
         
         return cell
     }
     
-//    func remplirTableau() {
-//        for c in carnet {
-//            carnet.append(c)
-//        }
-//    }
+    //    func remplirTableau() {
+    //        for c in carnet {
+    //            carnet.append(c)
+    //        }
+    //    }
     
     
     /*
@@ -101,21 +103,12 @@ class CarnetView: UITableViewController {
      override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
          if editingStyle == .delete {
              // Delete the row from the data source
-            for c in carnet {
-                print(c.toString())
-            }
-            db.deleteCarnet(id_c: indexPath.row)
-            print("======")
-            for c in carnet {
-                print(c.toString())
-            }
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            
+             tableView.deleteRows(at: [indexPath], with: .fade)
          } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
          }
      }
- 
+    
     
     /*
      // Override to support rearranging the table view.
@@ -143,4 +136,5 @@ class CarnetView: UITableViewController {
      */
     
 }
+
 
