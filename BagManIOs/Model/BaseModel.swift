@@ -10,17 +10,17 @@ import Foundation
 
 class BaseModel {
     var id:Int
-    var createdAt:Double
-    var updatedAt:Double
+    var createdAt:Date
+    var updatedAt:Date
     
     init() {
         // Vu qu'il faut absolument instancier les parametres, -1 pour un id signifie qu'il n'est pas encore attribué dans la bdd
         self.id = -1
-        self.createdAt = Date().timeIntervalSince1970
-        self.updatedAt = Date().timeIntervalSince1970
+        self.createdAt = Date()
+        self.updatedAt = Date()
     }
     
-    init(createdAt:Double, updatedAt:Double) {
+    init(createdAt:Date, updatedAt:Date) {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.id = -1

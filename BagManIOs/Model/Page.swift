@@ -12,6 +12,7 @@ class Page: BaseModel {
     var title:String
     var content:String
     var summary:String
+
     
     init(id_pf:Int, title_pf:String, content_pf:String, summary_pf:String) {
         self.title = title_pf
@@ -30,7 +31,7 @@ class Page: BaseModel {
         super.init()
     }
     
-    init(id_pf:Int, title_pf:String, content_pf:String, summary_pf:String, createdAt_pf:Double, updatedAt_pf:Double) {
+    init(id_pf:Int, title_pf:String, content_pf:String, summary_pf:String, createdAt_pf:Date, updatedAt_pf:Date) {
         self.title = title_pf
         self.content = content_pf
         self.summary = summary_pf

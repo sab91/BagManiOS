@@ -19,11 +19,11 @@ class Carnet: BaseModel {
         super.init()
     }
     
-    init(id_pf:Int, name_pf:String, createdAt_pf:Double, updatedAt_pf:Double) {
+    init(id_pf:Int, name_pf:String, createdAt_cf:Date, updatedAt_cf:Date) {
         self.name = name_pf
         self.pages = [Int]()
         
-        super.init(createdAt: createdAt_pf, updatedAt: updatedAt_pf)
+        super.init(createdAt: createdAt_cf, updatedAt: updatedAt_cf)
         self.id = id_pf
     }
     
@@ -31,5 +31,8 @@ class Carnet: BaseModel {
         return "Carnet : \(self.id) / \(self.name)"
     }
     
+//    func getCarnet() -> [Carnet] {
+//        
+//    }
     
 }
