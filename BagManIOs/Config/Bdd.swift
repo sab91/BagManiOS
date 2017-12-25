@@ -15,7 +15,9 @@ class Bdd {
     var database: Connection!
     let MODEL_NAME_PAGE: Table
     let MODEL_NAME_CARNET: Table
+    let MODEL_NAME_AUTH: Table
     let NAME = Expression<String>("name")
+    let EMAIL_ACCOUNT = Expression<String>("email_account")
     let TITLE = Expression<String>("title")
     let CONTENT = Expression<String>("content")
     let SUMMARY = Expression<String>("summary")
@@ -23,6 +25,8 @@ class Bdd {
     let UPDATED_AT = Expression<Date>("updated_at")
     let CARNET_ID = Expression<Int>("carnet_id")
     let id = Expression<Int>("id")
+    let EMAIL = Expression<String>("email")
+    let MDP = Expression<String>("password")
     
     // Constructeur
     init() {
@@ -30,11 +34,15 @@ class Bdd {
         self.DATABASE_VERSION = 1
         self.MODEL_NAME_PAGE = Table("page")
         self.MODEL_NAME_CARNET = Table("carnet")
+        self.MODEL_NAME_AUTH = Table("auth")
         
+        // initialisation de la bdd
         createDb()
-        
+        // initialisation des tables de la bdd
         createTables()
     }
+    
+    // ================= Création ================
 
     // Création de la base de données
     func createDb() {
@@ -58,7 +66,8 @@ class Bdd {
     
         createPageTable()
         createCarnetTable()
-        print("Created table")
+        createAuthTable()
+//        print("Created table")
        
     }
     
@@ -78,7 +87,7 @@ class Bdd {
                 //Tentative de création de clé étrangère
                 t.foreignKey(CARNET_ID, references: MODEL_NAME_CARNET, id)
             })
-            print("=====creation ", MODEL_NAME_PAGE)
+//            print("=====creation ", MODEL_NAME_PAGE)
         } catch {
             print(error)
         }
@@ -96,12 +105,37 @@ class Bdd {
                 t.column(NAME)
                 t.column(CREATED_AT)
                 t.column(UPDATED_AT)
+                t.column(EMAIL_ACCOUNT)
+                t.foreignKey(EMAIL_ACCOUNT, references: MODEL_NAME_AUTH, EMAIL)
+                
             })
-            print("======creation ", MODEL_NAME_CARNET)
+//            print("======creation ", MODEL_NAME_CARNET)
         } catch {
             print(error)
         }
     }
+    
+    // Création de la table authentification
+    func createAuthTable() {
+        
+        do {
+            try database.run(MODEL_NAME_AUTH.create { t in
+                t.column(id, primaryKey: true)
+                t.column(EMAIL)
+                t.column(MDP)
+                t.column(CREATED_AT)
+                t.column(UPDATED_AT)
+                t.unique(EMAIL)
+            })
+//            print("======creation ", MODEL_NAME_AUTH)
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    
+    // =============== Insert =====================
     
     // Insertion d'une page dans la bdd
     func insertPage(page: Page) -> Int {
@@ -121,7 +155,7 @@ class Bdd {
     
     // Insertion d'un carnet dans la base
     func insertCarnet(carnet: Carnet) -> Int {
-        let insertTable =  self.MODEL_NAME_CARNET.insert(NAME <- carnet.name, CREATED_AT <- carnet.createdAt, UPDATED_AT <- carnet.updatedAt)
+        let insertTable =  self.MODEL_NAME_CARNET.insert(NAME <- carnet.name, CREATED_AT <- carnet.createdAt, UPDATED_AT <- carnet.updatedAt, EMAIL_ACCOUNT <- carnet.email)
         
         do {
             let rowId = try self.database.run(insertTable)
@@ -132,6 +166,40 @@ class Bdd {
             return -1
         }
     }
+    
+    // Insérer un nouveau compte dans la bdd
+    func insertAccount(email: String, password: String) {
+        let insertTable =  self.MODEL_NAME_AUTH.insert(EMAIL <- email, MDP <- password, CREATED_AT <- Date(), UPDATED_AT <- Date())
+        
+        do {
+            try self.database.run(insertTable)
+            print("new account inserted")
+           
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    
+    // ================ Update ====================
+    // Mettre à jour un compte dans la bdd
+    func updateAccount(email: String, mdp: String) {
+        
+        let data = self.MODEL_NAME_AUTH.filter(self.EMAIL == email)
+        let updateData = data.update(EMAIL <- self.EMAIL, MDP <- mdp, CREATED_AT <- self.CREATED_AT, UPDATED_AT <- Date())
+        
+        do {
+            try self.database.run(updateData)
+            print("updated account")
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    
+    
     
     // Mettre à jour les données d'une page et modifier les données dans la bdd
     func updatePage(page: Page, id_p: Int) {
@@ -155,7 +223,7 @@ class Bdd {
         
         print(carnet.createdAt)
         let data = self.MODEL_NAME_CARNET.filter(self.id == id_c)
-        let updateData = data.update(self.NAME <- carnet.name, self.CREATED_AT <- carnet.createdAt, self.UPDATED_AT <- Date())
+        let updateData = data.update(self.NAME <- carnet.name, self.CREATED_AT <- carnet.createdAt, self.UPDATED_AT <- Date(), self.EMAIL_ACCOUNT <- carnet.email)
 
         do {
             try self.database.run(updateData)
@@ -166,6 +234,9 @@ class Bdd {
         }
     }
     
+    
+    
+    // =============== Suppression ================
     
     // Supprimer une page
     func deletePage(id_p: Int) {
@@ -188,6 +259,19 @@ class Bdd {
         do {
             try self.database.run(deleteUser)
             print("page deleted")
+        } catch {
+            print(error)
+        }
+    }
+    
+    //Supprimer les pages correspondant au carnet supprimé
+    func deletePageByCarnet(carnet_id: Int) {
+        do{
+            let query = try self.database.prepare(MODEL_NAME_PAGE.filter(CARNET_ID == carnet_id))
+            for q in query {
+                let id_d = q[id]
+                deletePage(id_p: id_d)
+            }
         } catch {
             print(error)
         }
@@ -250,7 +334,23 @@ class Bdd {
         }
         
     }
+    
+    // Supprimer un compte dans la bdd
+    func deleteAccount(email: String) {
+        
+        let data = self.MODEL_NAME_AUTH.filter(self.EMAIL == email)
+        let deleteUser = data.delete()
+        
+        do {
+            try self.database.run(deleteUser)
+            print("Account deleted")
+        } catch {
+            print(error)
+        }
+    }
 
+    
+    // =========== Affichage de contenu ==============
 
     // Afficher le contenu de la table page
     func getListPage() -> [Page] {
@@ -267,10 +367,10 @@ class Bdd {
     }
     
     // Afficher le contenu de la table carnet
-    func getListCarnet() -> [Carnet] {
+    func getListCarnet(email: String) -> [Carnet] {
         var tabCarnet: [Carnet] = []
         do {
-            let carnets = try self.database.prepare(self.MODEL_NAME_CARNET)
+            let carnets = try self.database.prepare(self.MODEL_NAME_CARNET.filter(EMAIL_ACCOUNT == email))
             for carnet in carnets {
                 tabCarnet.append(DAO.objectToCarnet(cursor: carnet))
             }
@@ -281,8 +381,10 @@ class Bdd {
     }
 
     
+    
+    // ============ conversion d'objet ==============
+
     // Chope un objet page dans la bdd en fonction d'un id
-    // Non testée....
     func getPageRow(pageId_pf: Int) -> Page {
         var page: Page = Page(title_pf: "title", content_pf: "content", summary_pf: "summary", carnetId_pf: 0)
         do{
@@ -298,7 +400,6 @@ class Bdd {
     }
     
     //Recuperation de toutes les pages appartenant au carnet précisé
-    // Non testée....
     func getPagesByCarnet(carnetId_pf: Int) -> [Page] {
         //let query = self.MODEL_NAME_PAGE.filter(self.CARNET_ID == carnetId_pf)
         //return Array(database.run(query))

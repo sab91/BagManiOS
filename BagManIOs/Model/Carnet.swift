@@ -10,17 +10,20 @@ import Foundation
 
 class Carnet: BaseModel {
     var name:String
+    var email: String
     var pages:[Int]
     
-    init(name_pf:String) {
+    init(name_pf:String, email_pf: String) {
         self.name = name_pf
+        self.email = email_pf
         self.pages = [Int]()
         
         super.init()
     }
     
-    init(id_pf:Int, name_pf:String, createdAt_cf:Date, updatedAt_cf:Date) {
+    init(id_pf:Int, name_pf:String, createdAt_cf:Date, updatedAt_cf:Date, email_pf: String) {
         self.name = name_pf
+        self.email = email_pf
         self.pages = [Int]()
         
         super.init(createdAt: createdAt_cf, updatedAt: updatedAt_cf)
@@ -28,7 +31,7 @@ class Carnet: BaseModel {
     }
     
     override func toString() -> String {
-        return "Carnet : \(self.id) / \(self.name)"
+        return "Carnet : \(self.id) / \(self.name) / \(self.email)"
     }
     
     

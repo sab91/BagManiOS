@@ -11,6 +11,7 @@ import SQLite
 
 class CarnetListView: UITableViewController, UISearchBarDelegate {
     var carnet: [Carnet] = []
+    var page: [Page] = []
     var currentCarnet: [Carnet] = []
     var idCarnetCell: String = "cell"
     var database: Connection!
@@ -27,8 +28,79 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         
+        // initialisation de la bdd
         self.db = Bdd()
+        
+        
+        //création de compte test
+        db.insertAccount(email: "sa@hh.fr", password: "aaa")
+        db.insertAccount(email: "ma@hh.fr", password: "bbb")
+
+        
+        // Manipulation d'objets Carnet
+        let carnet1:Carnet = Carnet(name_pf: "Carnet1", email_pf: "sa@hh.fr")
+        let carnet2:Carnet = Carnet(name_pf: "Carnet2", email_pf: "sa@hh.fr")
+        let carnet3:Carnet = Carnet(name_pf: "Carnet3", email_pf: "sa@hh.fr")
+        let carnet4:Carnet = Carnet(name_pf: "Carnet4", email_pf: "ma@hh.fr")
+        
+        // test insertions carnets
+                carnet1.id = db.insertCarnet(carnet: carnet1)
+                carnet2.id = db.insertCarnet(carnet: carnet2)
+                carnet3.id = db.insertCarnet(carnet: carnet3)
+                carnet4.id = db.insertCarnet(carnet: carnet4)
+        
+        //        print(carnet1.toString())
+        //        print(carnet2.toString())
+        
+        // Manipulation d'objets Pages
+        let page1:Page = Page(title_pf: "Title1", content_pf: "Content1", summary_pf: "Summary1", carnetId_pf: carnet1.id)
+        let page2:Page = Page(title_pf: "Title2", content_pf:"Content2", summary_pf:"Summary2", carnetId_pf: carnet2.id)
+        let page3:Page = Page(title_pf: "Title3", content_pf:"Content3", summary_pf:"Summary3", carnetId_pf: carnet3.id)
+        let page4:Page = Page(title_pf: "Title4", content_pf:"Content4", summary_pf:"Summary4", carnetId_pf: carnet4.id)
+        let page5:Page = Page(title_pf: "Title5", content_pf:"Content5", summary_pf:"Summary5", carnetId_pf: carnet1.id)
+        
+        //        print(page1.toString())
+        //        print(page2.toString())
+        
+        
+        
+        // tests insertions pages
+        //
+                page1.id = db.insertPage(page: page1)
+                page2.id = db.insertPage(page: page2)
+                page3.id = db.insertPage(page: page3)
+                page4.id = db.insertPage(page: page4)
+                page5.id = db.insertPage(page: page5)
+        
+        
+        
+        // tests updates
+        displayCarnet(tabCarnet: db.getListCarnet())
+        //        var listPage = db.getListPage()
+        displayPage(tabPage: db.getListPage())
+        
+        //        db.updatePage(page: page3, id_p: carnet1.id)
+        //        db.updateCarnet(carnet: carnet2, id_c: carnet3.id)
+        
+        // tests deletes
+//                db.deletePage(id_p: 1)
+        //        db.deleteCarnet(id_c: 1)
+        //        print("================================")
+        
+        //        db.getListCarnet()
+        
+        //        db.getListPage()
+        
+//                db.deleteTables()
+        //        db.getListPage()
+        //        print("================================")
+        
+        //self.db = Bdd()
+        
+        
+        
         carnet = db.getListCarnet()
+        page = db.getListPage()
         currentCarnet = carnet
         alterView()
         
@@ -36,7 +108,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.rightBarButtonItem = self.editButtonItem
+//         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     
@@ -45,6 +117,9 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        self.performSegue(withIdentifier: "loginView", sender: self)
+    }
     
     // MARK: - Table view data source
     
@@ -68,11 +143,9 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCarnetCell, for: indexPath)
         
         cell.textLabel?.text = "\(currentCarnet[indexPath.row].name)"
-        print(indexPath.section)
-        print(indexPath.row)
-        cell.detailTextLabel?.text = "Dernière mis à jour le : \(currentCarnet[indexPath.row].updatedAt)"
-//        return cell
-        
+//        print(indexPath.section)
+//        print(indexPath.row)
+        cell.detailTextLabel?.text = "Dernière mis à jour le : \(currentCarnet[indexPath.row].updatedAt)"        
         return cell
     }
 
@@ -115,6 +188,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
            
             // suppresion du carnet dans la bdd
             db.deleteCarnet(id_c: idCarnet)
+            db.deletePageByCarnet(carnet_id: idCarnet)
 
             // supression du carnet dans le tableau carnet pour ne pas qu'il réapparait lorque l'on fait change de view et que l'on revient
             currentCarnet.remove(at: idRow)
@@ -172,7 +246,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
-    // Mettre la search bar en haut et l'a gardé même lors du scroll
+    // Mettre la search bar en haut et la garder même lors du scroll
     func alterView() {
         tableView.tableHeaderView = UIView()
         navigationItem.titleView = searchBar
@@ -196,5 +270,23 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         
     }
+    
+    
+    /////// test affichage
+    func displayPage(tabPage: [Page]) {
+        for page in tabPage {
+            print(page.toString())
+        }
+    }
+    
+    
+    func displayCarnet(tabCarnet: [Carnet]) {
+        for carnet in tabCarnet{
+            print(carnet.toString())
+        }
+    }
+    
+
+    
 }
 

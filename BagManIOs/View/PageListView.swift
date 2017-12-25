@@ -9,44 +9,38 @@
 import UIKit
 import SQLite
 
-class PageListView: UITableViewController {
+class PageListView: UITableViewController, UISearchBarDelegate {
     var page: [Page] = []
+    var currentPage: [Page] = []
     var carnet_id: Int!
-    var idCarnetCell: String = "cell"
+    var idPageCell: String = "cell_p"
     var database: Connection!
     var db: Bdd!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         self.db = Bdd()
-        //carnet_id = 1
+        
         page = db.getPagesByCarnet(carnetId_pf: carnet_id)
-        print(page)
+        currentPage = page
+        alterView()
+
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
 //         Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.toolbarItems?.append(editButtonItem)
     }
     
-    // Cette fonction permet de transmettre des données vers une autre View
-    // Ici on transmet l'id du carnet pour qu'il affiche uniquement les pages avec la foreign key carnet_id correspondante
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        var id = 0
-//        guard let pageView = segue.destination as? PageView else {return}
-//        if let cell = sender as? UITableViewCell, let title = cell.textLabel?.text {
-//            do{
-//                let query = try self.db.database.prepare(db.MODEL_NAME_PAGE.filter(db.TITLE == title))
-//                for q in query {
-//                    id = q[db.id]
-//                }
-//            } catch {
-//                print (error)
-//            }
-//            pageView.carnet_id = id
-//        }
-//    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -62,7 +56,7 @@ class PageListView: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return page.count
+        return currentPage.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -72,22 +66,17 @@ class PageListView: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: idCarnetCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: idPageCell, for: indexPath)
         
-        cell.textLabel?.text = "\(page[indexPath.row].title)"
-        print(indexPath.section)
-        print(indexPath.row)
-        cell.detailTextLabel?.text = "Dernière mis à jour le : \(page[indexPath.row].updatedAt)"
-        //        return cell
+        cell.textLabel?.text = "\(currentPage[indexPath.row].title)"
+//        print(indexPath.section)
+//        print(indexPath.row)
+        cell.detailTextLabel?.text = "Dernière mis à jour le : \(currentPage[indexPath.row].updatedAt)"
+        
         
         return cell
     }
-    
-    //    func remplirTableau() {
-    //        for c in carnet {
-    //            carnet.append(c)
-    //        }
-    //    }
+
     
     
     /*
@@ -102,8 +91,37 @@ class PageListView: UITableViewController {
      // Override to support editing the table view.
      override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
          if editingStyle == .delete {
-             // Delete the row from the data source
-             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // cellule sur laquelle on clique
+            let cell = tableView.cellForRow(at: indexPath)
+            // récupération de son title (nom de la page)
+            let title = cell?.textLabel?.text
+            // id de la donnée dans le tableau page
+            var idRow = 0
+            // id de la page dans la base de données
+            var idPage = 0
+            // compteur dans le tableau page qui permettra de savoir quelle donnée supprimer dans le tableau
+            var i=0
+            
+            for c in currentPage {
+                // recherche dans le tableau page l'id correspondant à celui de la base de données
+                if c.title == title {
+                    idPage = c.id // id dans la base de données
+                    idRow = i // id dans le tableau page
+                    //print("=====", idPage)
+                }
+                i+=1
+            }
+            
+            // suppresion de la page dans la bdd
+            db.deletePage(id_p: idPage)
+            
+            // supression de la page dans le tableau page pour ne pas qu'il réapparait lorque l'on change de view et que l'on revient
+            currentPage.remove(at: idRow)
+            
+            // suppression de la ligne (cell) avec effet
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
          } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
          }
@@ -125,15 +143,75 @@ class PageListView: UITableViewController {
      }
      */
     
-    /*
+    
      // MARK: - Navigation
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // Cette fonction permet de transmettre des données vers une autre View
+    // Ici on transmet les valeurs de la page pour que son contenue soit affiché dans la vue suivante
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var id = 0
+        var titre: String!
+        var content: String!
+        var summary: String!
+        var createdAt: Date!
+        var updatedAt: Date!
+        
+        guard let pageView = segue.destination as? PageView else {return}
+        if let cell = sender as? UITableViewCell, let title = cell.textLabel?.text {
+            do{
+                let query = try self.db.database.prepare(db.MODEL_NAME_PAGE.filter(db.TITLE == title))
+                for q in query {
+                    id = q[db.id]
+                    titre = q[db.TITLE]
+                    summary = q[db.SUMMARY]
+                    content = q[db.CONTENT]
+                    createdAt = q[db.CREATED_AT]
+                    updatedAt = q[db.UPDATED_AT]
+                }
+            } catch {
+                print (error)
+            }
+            pageView.id_page = id
+            pageView.titre = titre
+            pageView.summary = summary
+            pageView.content = content
+            pageView.createAt = createdAt
+            pageView.updatedAt = updatedAt
+        }
+    }
+    
+    
+    
+    // MARK: - Search bar
+    
+    private func setUpSearchBar() {
+        searchBar.delegate = self
+    }
+    
+    // Mettre la search bar en haut et la garder même lors du scroll
+    func alterView() {
+        tableView.tableHeaderView = UIView()
+        navigationItem.titleView = searchBar
+        searchBar.placeholder = "Rechercher une Page"
+    }
+    
+    // Filtrage des données en fonction de la recherche tapée
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            currentPage = page
+            tableView.reloadData()
+            return
+        }
+        currentPage = page.filter({ p -> Bool in
+            //guard let text = searchBar.text else { return false }
+            return p.title.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    } // called when text changes (including clear)
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+    }
     
 }
 
