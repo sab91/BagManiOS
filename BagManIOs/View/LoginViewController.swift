@@ -38,8 +38,8 @@ class LoginViewController: UIViewController {
         
         var dbemail = ""
         var dbmdp = ""
-        var dbcreation = Date()
-        var dbupdate = Date()
+//        var dbcreation = Date()
+//        var dbupdate = Date()
         
         // Check empty fields
         if((userEmail?.isEmpty)! || (userPassword?.isEmpty)!) {
@@ -57,8 +57,8 @@ class LoginViewController: UIViewController {
                 for row in secondQuery {
                     dbemail = row[db.EMAIL]
                     dbmdp = row[db.MDP]
-                    dbcreation = row[db.CREATED_AT]
-                    dbupdate = row[db.UPDATED_AT]
+//                    dbcreation = row[db.CREATED_AT]
+//                    dbupdate = row[db.UPDATED_AT]
                 }
                 
                 if (userEmail == dbemail && userPassword == dbmdp) {

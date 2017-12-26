@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Auth" representedClassName="Auth" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="email_carnet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CarnetTable" inverseName="email" inverseEntity="CarnetTable" syncable="YES"/>
+    </entity>
     <entity name="CarnetTable" representedClassName="CarnetTable" syncable="YES" codeGenerationType="class">
         <attribute name="created_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="email_account" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="carnet_id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PageTable" inverseName="carnet" inverseEntity="PageTable" syncable="YES"/>
+        <relationship name="email" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Auth" inverseName="email_carnet" inverseEntity="Auth" syncable="YES"/>
     </entity>
     <entity name="PageTable" representedClassName="PageTable" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,10 +24,11 @@
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="carnet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CarnetTable" syncable="YES"/>
+        <relationship name="carnet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CarnetTable" inverseName="carnet_id" inverseEntity="CarnetTable" syncable="YES"/>
     </entity>
     <elements>
+        <element name="CarnetTable" positionX="-54" positionY="36" width="128" height="150"/>
         <element name="PageTable" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="CarnetTable" positionX="-54" positionY="36" width="128" height="105"/>
+        <element name="Auth" positionX="-54" positionY="45" width="128" height="135"/>
     </elements>
 </model>

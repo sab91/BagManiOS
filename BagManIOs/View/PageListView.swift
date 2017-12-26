@@ -28,6 +28,7 @@ class PageListView: UITableViewController, UISearchBarDelegate {
         
         self.db = Bdd()
         
+        UserDefaults.standard.set(carnet_id, forKey: "idCarnet")
         page = db.getPagesByCarnet(carnetId_pf: carnet_id)
         currentPage = page
         alterView()
