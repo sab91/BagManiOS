@@ -60,6 +60,14 @@
                             <outlet property="delegate" destination="6LB-uM-nTE" id="mg2-8R-sjV"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="TUc-I7-1Uu"/>
+                        <barButtonItem title="Disconnect" width="42" id="YgG-Wc-3s9">
+                            <connections>
+                                <action selector="logoutButton:" destination="6LB-uM-nTE" id="Zx1-i2-5Bi"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Home" id="4nc-mO-ZQ3">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Scm-DH-A95">
                             <connections>
@@ -67,6 +75,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchBar" destination="yNE-3k-rbr" id="tdQ-Ip-DDf"/>
                         <segue destination="cKe-KK-O5c" kind="presentation" identifier="loginView" id="76z-Hl-MYr"/>
@@ -205,7 +214,7 @@
         <!--LogIn-->
         <scene sceneID="TR1-HB-L6j">
             <objects>
-                <viewController title="LogIn" id="cKe-KK-O5c" sceneMemberID="viewController">
+                <viewController title="LogIn" id="cKe-KK-O5c" customClass="LoginViewController" customModule="BagManIOs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="guN-af-4kX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -223,6 +232,9 @@
                                         <state key="normal" title="Log In">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="loginButton:" destination="cKe-KK-O5c" eventType="touchUpInside" id="iMe-eY-D9C"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXX-oG-TqM">
                                         <rect key="frame" x="147" y="506.5" width="80" height="30"/>
@@ -333,6 +345,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Nk-vr-X3Z"/>
                     </view>
+                    <connections>
+                        <outlet property="userEmailTextField" destination="15g-iz-ZwK" id="Yxn-UC-k4N"/>
+                        <outlet property="userPasswordTextField" destination="HQr-fv-ph4" id="50X-RX-UwK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aop-e4-AmV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -573,7 +589,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zgM-m6-Dwk"/>
-        <segue reference="rmj-05-y8a"/>
+        <segue reference="76z-Hl-MYr"/>
     </inferredMetricsTieBreakers>
 </document>

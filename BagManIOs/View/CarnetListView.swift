@@ -17,6 +17,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
     var database: Connection!
     var db: Bdd!
     var idCell: [Int] = []
+    var currentEmail: String = ""
     
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -44,10 +45,10 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         let carnet4:Carnet = Carnet(name_pf: "Carnet4", email_pf: "ma@hh.fr")
         
         // test insertions carnets
-                carnet1.id = db.insertCarnet(carnet: carnet1)
-                carnet2.id = db.insertCarnet(carnet: carnet2)
-                carnet3.id = db.insertCarnet(carnet: carnet3)
-                carnet4.id = db.insertCarnet(carnet: carnet4)
+//                carnet1.id = db.insertCarnet(carnet: carnet1)
+//                carnet2.id = db.insertCarnet(carnet: carnet2)
+//                carnet3.id = db.insertCarnet(carnet: carnet3)
+//                carnet4.id = db.insertCarnet(carnet: carnet4)
         
         //        print(carnet1.toString())
         //        print(carnet2.toString())
@@ -66,16 +67,16 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         
         // tests insertions pages
         //
-                page1.id = db.insertPage(page: page1)
-                page2.id = db.insertPage(page: page2)
-                page3.id = db.insertPage(page: page3)
-                page4.id = db.insertPage(page: page4)
-                page5.id = db.insertPage(page: page5)
+//                page1.id = db.insertPage(page: page1)
+//                page2.id = db.insertPage(page: page2)
+//                page3.id = db.insertPage(page: page3)
+//                page4.id = db.insertPage(page: page4)
+//                page5.id = db.insertPage(page: page5)
         
         
         
         // tests updates
-        displayCarnet(tabCarnet: db.getListCarnet())
+        displayCarnet(tabCarnet: db.getListCarnet(email: "sa@hh.fr"))
         //        var listPage = db.getListPage()
         displayPage(tabPage: db.getListPage())
         
@@ -98,8 +99,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         //self.db = Bdd()
         
         
-        
-        carnet = db.getListCarnet()
+        carnet = db.getListCarnet(email: currentEmail)
         page = db.getListPage()
         currentCarnet = carnet
         alterView()
@@ -118,8 +118,27 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.performSegue(withIdentifier: "loginView", sender: self)
+        let userLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+        if !userLoggedIn {
+            self.performSegue(withIdentifier: "loginView", sender: self)
+        } else {
+            currentEmail = UserDefaults.standard.string(forKey: "currentEmail")!
+            print("=====current email: ", currentEmail)
+            carnet = db.getListCarnet(email: currentEmail)
+            page = db.getListPage()
+            currentCarnet = carnet
+            tableView.reloadData()
+        }
     }
+    
+    @IBAction func logoutButton(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+        UserDefaults.standard.set("", forKey: "currentEmail")
+        UserDefaults.standard.synchronize()
+        self.performSegue(withIdentifier: "loginView", sender: self)
+
+    }
+    
     
     // MARK: - Table view data source
     

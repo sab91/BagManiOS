@@ -302,13 +302,28 @@ class Bdd {
         }
     }
     
+    // Supprimer un compte dans la bdd
+    func deleteAccount(email: String) {
+        
+        let data = self.MODEL_NAME_AUTH.filter(self.EMAIL == email)
+        let deleteUser = data.delete()
+        
+        do {
+            try self.database.run(deleteUser)
+            print("Account deleted")
+        } catch {
+            print(error)
+        }
+    }
+    
 
     // Suppression de l'ensemble des tables de la bdd
     func deleteTables() {
        
         deletePageTable()
         deleteCarnetTable()
-        print("Deleted table")
+        deleteAccountTable()
+        print("Deleted all tables")
         
     }
     
@@ -317,7 +332,7 @@ class Bdd {
     func deletePageTable() {
         do {
             try database.run(MODEL_NAME_PAGE.drop())
-            print("======delete ", MODEL_NAME_PAGE)
+            print("Page table deleted")
         } catch {
             print(error)
         }
@@ -328,22 +343,18 @@ class Bdd {
     func deleteCarnetTable() {
         do {
             try database.run(MODEL_NAME_CARNET.drop())
-            print("======delete ", MODEL_NAME_CARNET)
+            print("Carnet table deleted")
         } catch {
             print(error)
         }
         
     }
     
-    // Supprimer un compte dans la bdd
-    func deleteAccount(email: String) {
-        
-        let data = self.MODEL_NAME_AUTH.filter(self.EMAIL == email)
-        let deleteUser = data.delete()
-        
+    // Supprimer la table auth de la bdd
+    func deleteAccountTable() {
         do {
-            try self.database.run(deleteUser)
-            print("Account deleted")
+            try self.database.run(MODEL_NAME_AUTH.drop())
+            print("Account table deleted")
         } catch {
             print(error)
         }
