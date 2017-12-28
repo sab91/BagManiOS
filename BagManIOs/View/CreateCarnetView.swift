@@ -21,6 +21,7 @@ class CreateCarnetView: UIViewController {
 
         self.db = Bdd()
         
+        
         // Do any additional setup after loading the view.
     }
 
@@ -32,9 +33,22 @@ class CreateCarnetView: UIViewController {
     @IBAction func createCarnet(_ sender: Any) {
         let currentEmail = UserDefaults.standard.string(forKey: "currentEmail")
         let carnet = Carnet(name_pf: titreCarnetTextField.text!, email_pf: currentEmail!)
-        let idCarnet = db.insertCarnet(carnet: carnet)
+        db.insertCarnet(carnet: carnet)
+        displayAlertMessage(userMessage: "Nouveau carnet créé")
         
     }
+    
+    
+    func displayAlertMessage(userMessage: String) {
+        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { action in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        myAlert.addAction(okAction)
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
     
     /*
     // MARK: - Navigation

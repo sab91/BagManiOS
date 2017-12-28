@@ -34,15 +34,15 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         
         
         //création de compte test
-        db.insertAccount(email: "sa@hh.fr", password: "aaa")
-        db.insertAccount(email: "ma@hh.fr", password: "bbb")
+//        db.insertAccount(email: "sa@hh.fr", password: "aaa")
+//        db.insertAccount(email: "ma@hh.fr", password: "bbb")
 
         
         // Manipulation d'objets Carnet
-        let carnet1:Carnet = Carnet(name_pf: "Carnet1", email_pf: "sa@hh.fr")
-        let carnet2:Carnet = Carnet(name_pf: "Carnet2", email_pf: "sa@hh.fr")
-        let carnet3:Carnet = Carnet(name_pf: "Carnet3", email_pf: "sa@hh.fr")
-        let carnet4:Carnet = Carnet(name_pf: "Carnet4", email_pf: "ma@hh.fr")
+//        let carnet1:Carnet = Carnet(name_pf: "Carnet1", email_pf: "sa@hh.fr")
+//        let carnet2:Carnet = Carnet(name_pf: "Carnet2", email_pf: "sa@hh.fr")
+//        let carnet3:Carnet = Carnet(name_pf: "Carnet3", email_pf: "sa@hh.fr")
+//        let carnet4:Carnet = Carnet(name_pf: "Carnet4", email_pf: "ma@hh.fr")
         
         // test insertions carnets
 //                carnet1.id = db.insertCarnet(carnet: carnet1)
@@ -54,11 +54,11 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         //        print(carnet2.toString())
         
         // Manipulation d'objets Pages
-        let page1:Page = Page(title_pf: "Title1", content_pf: "Content1", summary_pf: "Summary1", carnetId_pf: carnet1.id)
-        let page2:Page = Page(title_pf: "Title2", content_pf:"Content2", summary_pf:"Summary2", carnetId_pf: carnet2.id)
-        let page3:Page = Page(title_pf: "Title3", content_pf:"Content3", summary_pf:"Summary3", carnetId_pf: carnet3.id)
-        let page4:Page = Page(title_pf: "Title4", content_pf:"Content4", summary_pf:"Summary4", carnetId_pf: carnet4.id)
-        let page5:Page = Page(title_pf: "Title5", content_pf:"Content5", summary_pf:"Summary5", carnetId_pf: carnet1.id)
+//        let page1:Page = Page(title_pf: "Title1", content_pf: "Content1", summary_pf: "Summary1", carnetId_pf: carnet1.id)
+//        let page2:Page = Page(title_pf: "Title2", content_pf:"Content2", summary_pf:"Summary2", carnetId_pf: carnet2.id)
+//        let page3:Page = Page(title_pf: "Title3", content_pf:"Content3", summary_pf:"Summary3", carnetId_pf: carnet3.id)
+//        let page4:Page = Page(title_pf: "Title4", content_pf:"Content4", summary_pf:"Summary4", carnetId_pf: carnet4.id)
+//        let page5:Page = Page(title_pf: "Title5", content_pf:"Content5", summary_pf:"Summary5", carnetId_pf: carnet1.id)
         
         //        print(page1.toString())
         //        print(page2.toString())
@@ -76,9 +76,9 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         
         
         // tests updates
-        displayCarnet(tabCarnet: db.getListCarnet(email: "sa@hh.fr"))
+//        displayCarnet(tabCarnet: db.getListCarnet(email: "sa@hh.fr"))
         //        var listPage = db.getListPage()
-        displayPage(tabPage: db.getListPage())
+//        displayPage(tabPage: db.getListPage())
         
         //        db.updatePage(page: page3, id_p: carnet1.id)
         //        db.updateCarnet(carnet: carnet2, id_c: carnet3.id)
@@ -99,9 +99,9 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         //self.db = Bdd()
         
         
-        carnet = db.getListCarnet(email: currentEmail)
-        page = db.getListPage()
-        currentCarnet = carnet
+//        carnet = db.getListCarnet(email: currentEmail)
+//        page = db.getListPage()
+//        currentCarnet = carnet
         alterView()
         
         // Uncomment the following line to preserve selection between presentations
@@ -109,6 +109,8 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 //         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.toolbarItems?.append(editButtonItem)
+
     }
     
     
@@ -207,6 +209,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
            
             // suppresion du carnet dans la bdd
             db.deleteCarnet(id_c: idCarnet)
+            //supprimer les pages associées au carnet
             db.deletePageByCarnet(carnet_id: idCarnet)
 
             // supression du carnet dans le tableau carnet pour ne pas qu'il réapparait lorque l'on fait change de view et que l'on revient
@@ -291,7 +294,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
     }
     
     
-    /////// test affichage
+    /////// test affichage =======================
     func displayPage(tabPage: [Page]) {
         for page in tabPage {
             print(page.toString())

@@ -138,32 +138,27 @@ class Bdd {
     // =============== Insert =====================
     
     // Insertion d'une page dans la bdd
-    func insertPage(page: Page) -> Int {
+    func insertPage(page: Page) {
         let insertTable =  self.MODEL_NAME_PAGE.insert(TITLE <- page.title, SUMMARY <- page.summary, CONTENT <- page.content, CREATED_AT <- page.createdAt, UPDATED_AT <- page.updatedAt, CARNET_ID <- page.carnet_id)
         
         do {
-            let rowId = try self.database.run(insertTable)
-            //page.id = Int(rowId)
+            try self.database.run(insertTable)
             print("new page inserted")
-            return Int(rowId)
         } catch {
             print(error)
-            return -1
         }
     }
     
     
     // Insertion d'un carnet dans la base
-    func insertCarnet(carnet: Carnet) -> Int {
+    func insertCarnet(carnet: Carnet) {
         let insertTable =  self.MODEL_NAME_CARNET.insert(NAME <- carnet.name, CREATED_AT <- carnet.createdAt, UPDATED_AT <- carnet.updatedAt, EMAIL_ACCOUNT <- carnet.email)
         
         do {
-            let rowId = try self.database.run(insertTable)
+            try self.database.run(insertTable)
             print("new carnet inserted")
-            return Int(rowId)
         } catch {
             print(error)
-            return -1
         }
     }
     
@@ -229,7 +224,6 @@ class Bdd {
             try self.database.run(updateData)
             print("User updated")
         } catch {
-            print("2")
             print(error)
         }
     }
@@ -408,6 +402,21 @@ class Bdd {
         }
         
         return page
+    }
+    
+    // Chope un objet carnet dans la bdd en fonction d'un id
+    func getCarnetRow(carnetId_pf: Int) -> Carnet {
+        var carnet: Carnet = Carnet(name_pf: "name", email_pf: "email")
+        do{
+            let query = try self.database.prepare(MODEL_NAME_CARNET.filter(id == carnetId_pf))
+            for c in query {
+                carnet = DAO.objectToCarnet(cursor: c)
+            }
+        } catch {
+            print(error)
+        }
+        
+        return carnet
     }
     
     //Recuperation de toutes les pages appartenant au carnet précisé

@@ -23,6 +23,8 @@ class CreatePageView: UIViewController {
 
         self.db = Bdd()
         
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -35,7 +37,21 @@ class CreatePageView: UIViewController {
         let carnetId = UserDefaults.standard.integer(forKey: "idCarnet")
         let page = Page(title_pf: titlePageTextField.text!, content_pf: contentPageTextField.text!, summary_pf: summaryPageTextField.text!, carnetId_pf: carnetId)
         db.insertPage(page: page)
+        displayAlertMessage(userMessage: "Nouvelle page créée")
+
     }
+    
+    
+    func displayAlertMessage(userMessage: String) {
+        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { action in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        myAlert.addAction(okAction)
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
     
     /*
     // MARK: - Navigation
