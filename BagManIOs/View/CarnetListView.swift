@@ -33,75 +33,6 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         self.db = Bdd()
         
         
-        //création de compte test
-//        db.insertAccount(email: "sa@hh.fr", password: "aaa")
-//        db.insertAccount(email: "ma@hh.fr", password: "bbb")
-
-        
-        // Manipulation d'objets Carnet
-//        let carnet1:Carnet = Carnet(name_pf: "Carnet1", email_pf: "sa@hh.fr")
-//        let carnet2:Carnet = Carnet(name_pf: "Carnet2", email_pf: "sa@hh.fr")
-//        let carnet3:Carnet = Carnet(name_pf: "Carnet3", email_pf: "sa@hh.fr")
-//        let carnet4:Carnet = Carnet(name_pf: "Carnet4", email_pf: "ma@hh.fr")
-        
-        // test insertions carnets
-//                carnet1.id = db.insertCarnet(carnet: carnet1)
-//                carnet2.id = db.insertCarnet(carnet: carnet2)
-//                carnet3.id = db.insertCarnet(carnet: carnet3)
-//                carnet4.id = db.insertCarnet(carnet: carnet4)
-        
-        //        print(carnet1.toString())
-        //        print(carnet2.toString())
-        
-        // Manipulation d'objets Pages
-//        let page1:Page = Page(title_pf: "Title1", content_pf: "Content1", summary_pf: "Summary1", carnetId_pf: carnet1.id)
-//        let page2:Page = Page(title_pf: "Title2", content_pf:"Content2", summary_pf:"Summary2", carnetId_pf: carnet2.id)
-//        let page3:Page = Page(title_pf: "Title3", content_pf:"Content3", summary_pf:"Summary3", carnetId_pf: carnet3.id)
-//        let page4:Page = Page(title_pf: "Title4", content_pf:"Content4", summary_pf:"Summary4", carnetId_pf: carnet4.id)
-//        let page5:Page = Page(title_pf: "Title5", content_pf:"Content5", summary_pf:"Summary5", carnetId_pf: carnet1.id)
-        
-        //        print(page1.toString())
-        //        print(page2.toString())
-        
-        
-        
-        // tests insertions pages
-        //
-//                page1.id = db.insertPage(page: page1)
-//                page2.id = db.insertPage(page: page2)
-//                page3.id = db.insertPage(page: page3)
-//                page4.id = db.insertPage(page: page4)
-//                page5.id = db.insertPage(page: page5)
-        
-        
-        
-        // tests updates
-//        displayCarnet(tabCarnet: db.getListCarnet(email: "sa@hh.fr"))
-        //        var listPage = db.getListPage()
-//        displayPage(tabPage: db.getListPage())
-        
-        //        db.updatePage(page: page3, id_p: carnet1.id)
-        //        db.updateCarnet(carnet: carnet2, id_c: carnet3.id)
-        
-        // tests deletes
-//                db.deletePage(id_p: 1)
-        //        db.deleteCarnet(id_c: 1)
-        //        print("================================")
-        
-        //        db.getListCarnet()
-        
-        //        db.getListPage()
-        
-//                db.deleteTables()
-        //        db.getListPage()
-        //        print("================================")
-        
-        //self.db = Bdd()
-        
-        
-//        carnet = db.getListCarnet(email: currentEmail)
-//        page = db.getListPage()
-//        currentCarnet = carnet
         alterView()
         
         // Uncomment the following line to preserve selection between presentations
@@ -164,8 +95,6 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCarnetCell, for: indexPath)
         
         cell.textLabel?.text = "\(currentCarnet[indexPath.row].name)"
-//        print(indexPath.section)
-//        print(indexPath.row)
         cell.detailTextLabel?.text = "Dernière mis à jour le : \(currentCarnet[indexPath.row].updatedAt)"        
         return cell
     }
@@ -283,11 +212,10 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
             return
         }
         currentCarnet = carnet.filter({ carnet -> Bool in
-            //guard let text = searchBar.text else { return false }
             return carnet.name.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
-    } // called when text changes (including clear)
+    }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         

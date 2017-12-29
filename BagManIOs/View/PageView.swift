@@ -31,6 +31,7 @@ class PageView: UIViewController, UITextViewDelegate {
         
         contentPage.delegate = self
         
+        // initialisation de la variable pour intéragir avec la db
         self.db = Bdd()
         
         titrePage.text = titre
@@ -75,7 +76,6 @@ class PageView: UIViewController, UITextViewDelegate {
     {
         arg.translatesAutoresizingMaskIntoConstraints = true
         arg.sizeToFit()
-        //arg.isScrollEnabled = false
     }
     
     

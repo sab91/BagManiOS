@@ -25,10 +25,9 @@ class LoginViewController: UIViewController {
 //        tap.cancelsTouchesInView = false
 //        self.view.addGestureRecognizer(tap)
         
-        // initialisation de la bdd
+        // initialisation de la variable pour intéragir avec la db
         self.db = Bdd()
         
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,14 +103,6 @@ class LoginViewController: UIViewController {
     
     
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if isnext {
-//            guard let carnetListView = segue.destination as? CarnetListView else {return}
-//            carnetListView.currentEmail = userEmail
-//            carnetListView.tableView.reloadData()
-//        }
-//
-//    }
     
     /*
     // MARK: - Navigation

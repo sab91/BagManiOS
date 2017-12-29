@@ -17,7 +17,18 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="earth_backgroung" translatesAutoresizingMaskIntoConstraints="NO" id="Rqr-hC-XpZ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Rqr-hC-XpZ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="3gg-ry-3hg"/>
+                            <constraint firstItem="Rqr-hC-XpZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gk2-ZX-1t8"/>
+                            <constraint firstItem="Rqr-hC-XpZ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ngH-tJ-0fb"/>
+                            <constraint firstAttribute="trailing" secondItem="Rqr-hC-XpZ" secondAttribute="trailing" id="o6K-Uo-oK7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -26,4 +37,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="earth_backgroung" width="1080" height="1920"/>
+    </resources>
 </document>

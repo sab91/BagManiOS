@@ -37,7 +37,6 @@
 		1EED1A411FEA8AC400B118E4 /* CarnetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED1A401FEA8AC400B118E4 /* CarnetListView.swift */; };
 		1EED1A491FEAA95500B118E4 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED1A481FEAA95500B118E4 /* DAO.swift */; };
 		5580331C1FE2E6FD00F1C3A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5580331B1FE2E6FD00F1C3A2 /* AppDelegate.swift */; };
-		5580331E1FE2E6FD00F1C3A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5580331D1FE2E6FD00F1C3A2 /* ViewController.swift */; };
 		558033211FE2E6FD00F1C3A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5580331F1FE2E6FD00F1C3A2 /* Main.storyboard */; };
 		558033241FE2E6FD00F1C3A2 /* BagManIOs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 558033221FE2E6FD00F1C3A2 /* BagManIOs.xcdatamodeld */; };
 		558033261FE2E6FD00F1C3A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 558033251FE2E6FD00F1C3A2 /* Assets.xcassets */; };
@@ -162,6 +161,9 @@
 		1E3A04091FF408AE002F0AF4 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		1E4564491FF179E7003C8EF3 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		1E4564511FF1AE4A003C8EF3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1E6C85A71FF68AA60089CE6B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1E6C85A91FF6CD900089CE6B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		1E6C85AA1FF6CD900089CE6B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1E7C1BCB1FF5B37D00D1A2EF /* BagManIOs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BagManIOs.entitlements; sourceTree = "<group>"; };
 		1EC4E21A1FE6D5980010A964 /* Bdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bdd.swift; sourceTree = "<group>"; };
 		1EED1A401FEA8AC400B118E4 /* CarnetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarnetListView.swift; sourceTree = "<group>"; };
@@ -170,7 +172,6 @@
 		5516CE471FEBE64000F5BBC4 /* BagManIOs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BagManIOs; sourceTree = "<group>"; };
 		558033181FE2E6FD00F1C3A2 /* BagManIOs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BagManIOs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5580331B1FE2E6FD00F1C3A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5580331D1FE2E6FD00F1C3A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		558033201FE2E6FD00F1C3A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		558033231FE2E6FD00F1C3A2 /* BagManIOs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BagManIOs.xcdatamodel; sourceTree = "<group>"; };
 		558033251FE2E6FD00F1C3A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -219,7 +220,6 @@
 			children = (
 				1EED1A401FEA8AC400B118E4 /* CarnetListView.swift */,
 				1E323AFD1FEC491F0059999F /* PageListView.swift */,
-				5580331D1FE2E6FD00F1C3A2 /* ViewController.swift */,
 				1E323B031FEC85B90059999F /* PageView.swift */,
 				1E4564491FF179E7003C8EF3 /* RegisterViewController.swift */,
 				1E4564511FF1AE4A003C8EF3 /* LoginViewController.swift */,
@@ -331,6 +331,7 @@
 		1EC4E21C1FE6D5AA0010A964 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E6C85A71FF68AA60089CE6B /* Security.framework */,
 				5516CE471FEBE64000F5BBC4 /* BagManIOs */,
 				5516CE431FEBE57700F5BBC4 /* BagManIOs.xcodeproj */,
 			);
@@ -473,7 +474,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -624,7 +625,6 @@
 				1E3A040C1FF408AE002F0AF4 /* IQTitleBarButtonItem.swift in Sources */,
 				1E3A04141FF408AE002F0AF4 /* IQKeyboardManager.swift in Sources */,
 				1E3A04161FF408AE002F0AF4 /* IQUIScrollView+Additions.swift in Sources */,
-				5580331E1FE2E6FD00F1C3A2 /* ViewController.swift in Sources */,
 				1E0EC1441FF27F1300449C4C /* CreateCarnetView.swift in Sources */,
 				1E323B041FEC85B90059999F /* PageView.swift in Sources */,
 				5580334D1FE2E7EE00F1C3A2 /* BaseModel.swift in Sources */,
@@ -679,6 +679,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				558033201FE2E6FD00F1C3A2 /* Base */,
+				1E6C85A91FF6CD900089CE6B /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -687,6 +688,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				558033281FE2E6FD00F1C3A2 /* Base */,
+				1E6C85AA1FF6CD900089CE6B /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -698,6 +700,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -743,9 +746,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -756,6 +762,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -789,14 +796,18 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -808,7 +819,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BagManIOs/BagManIOs.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BagManIOs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -824,7 +834,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BagManIOs/BagManIOs.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BagManIOs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

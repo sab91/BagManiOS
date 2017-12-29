@@ -26,11 +26,11 @@ class PageListView: UITableViewController, UISearchBarDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         
+        // initialisation de la variable pour intéragir avec la db
         self.db = Bdd()
         
-        UserDefaults.standard.set(carnet_id, forKey: "idCarnet")
-        page = db.getPagesByCarnet(carnetId_pf: carnet_id)
-        currentPage = page
+    
+        
         alterView()
 
 
@@ -49,8 +49,20 @@ class PageListView: UITableViewController, UISearchBarDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
+        let userLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+        if !userLoggedIn {
+            self.performSegue(withIdentifier: "loginView", sender: self)
+        } else {
+            let currentEmail = UserDefaults.standard.string(forKey: "currentEmail")!
+            print("=====current email: ", currentEmail)
+            UserDefaults.standard.set(carnet_id, forKey: "idCarnet")
+            page = db.getPagesByCarnet(carnetId_pf: carnet_id)
+            currentPage = page
+            tableView.reloadData()
+        }
     }
+    
+
     
     // MARK: - Table view data source
     
@@ -208,9 +220,9 @@ class PageListView: UITableViewController, UISearchBarDelegate {
             return
         }
         currentPage = page.filter({ p -> Bool in
-            //guard let text = searchBar.text else { return false }
             return p.title.lowercased().contains(searchText.lowercased())
         })
+        dump(currentPage)
         tableView.reloadData()
     } // called when text changes (including clear)
     

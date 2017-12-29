@@ -1,0 +1,120 @@
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "3fl-NB-P6m"; */
+"3fl-NB-P6m.text" = "Subtitle";
+
+/* Class = "UINavigationItem"; title = "Home"; ObjectID = "4nc-mO-ZQ3"; */
+"4nc-mO-ZQ3.title" = "Home";
+
+/* Class = "UITableViewController"; title = "Liste des Carnets"; ObjectID = "6LB-uM-nTE"; */
+"6LB-uM-nTE.title" = "Liste des Carnets";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "871-6S-wpy"; */
+"871-6S-wpy.placeholder" = "Email";
+
+/* Class = "UIViewController"; title = "Register"; ObjectID = "CC9-wV-CyB"; */
+"CC9-wV-CyB.title" = "Register";
+
+/* Class = "UITextField"; placeholder = "Your Email"; ObjectID = "Cvf-2L-38Z"; */
+"Cvf-2L-38Z.placeholder" = "Your Email";
+
+/* Class = "UIViewController"; title = "Créer Carnet"; ObjectID = "Ett-5d-0h6"; */
+"Ett-5d-0h6.title" = "Créer Carnet";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "JUI-e8-xkb"; */
+"JUI-e8-xkb.placeholder" = "Password";
+
+/* Class = "UITextField"; placeholder = "Your Passeword again"; ObjectID = "MQS-R4-2Ya"; */
+"MQS-R4-2Ya.placeholder" = "Your Passeword again";
+
+/* Class = "UILabel"; text = "Register"; ObjectID = "MUI-4H-5Le"; */
+"MUI-4H-5Le.text" = "Register";
+
+/* Class = "UILabel"; text = "Titre du carnet :"; ObjectID = "NhZ-hl-lfr"; */
+"NhZ-hl-lfr.text" = "Titre du carnet :";
+
+/* Class = "UIButton"; normalTitle = "Créer"; ObjectID = "S3v-wN-Kt5"; */
+"S3v-wN-Kt5.normalTitle" = "Créer";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "Tg9-W1-9uA"; */
+"Tg9-W1-9uA.normalTitle" = "Register";
+
+/* Class = "UIViewController"; title = "Créer Page"; ObjectID = "TkA-3i-cwp"; */
+"TkA-3i-cwp.title" = "Créer Page";
+
+/* Class = "UITableViewController"; title = "Les Pages"; ObjectID = "V6x-Rm-Jix"; */
+"V6x-Rm-Jix.title" = "Les Pages";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "YIk-BQ-Npd"; */
+"YIk-BQ-Npd.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "Titre"; ObjectID = "YNl-oU-U32"; */
+"YNl-oU-U32.placeholder" = "Titre";
+
+/* Class = "UIBarButtonItem"; title = "Disconnect"; ObjectID = "YgG-Wc-3s9"; */
+"YgG-Wc-3s9.title" = "Disconnect";
+
+/* Class = "UIViewController"; title = "LogIn"; ObjectID = "cKe-KK-O5c"; */
+"cKe-KK-O5c.title" = "LogIn";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "cWU-uC-uBG"; */
+"cWU-uC-uBG.text" = "Title";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "cXg-gG-6Dg"; */
+"cXg-gG-6Dg.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UITextField"; placeholder = "Titre"; ObjectID = "ehE-7w-kdy"; */
+"ehE-7w-kdy.placeholder" = "Titre";
+
+/* Class = "UILabel"; text = "Password :"; ObjectID = "fjS-VJ-oQH"; */
+"fjS-VJ-oQH.text" = "Password :";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "gqt-Gh-Xwc"; */
+"gqt-Gh-Xwc.text" = "Subtitle";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "hkL-Wm-cjP"; */
+"hkL-Wm-cjP.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "UpdateDate"; ObjectID = "jUX-Aq-bhm"; */
+"jUX-Aq-bhm.text" = "UpdateDate";
+
+/* Class = "UILabel"; text = "Titre :"; ObjectID = "jbV-Ct-hLT"; */
+"jbV-Ct-hLT.text" = "Titre :";
+
+/* Class = "UIButton"; normalTitle = "Créer"; ObjectID = "jiv-H1-wFD"; */
+"jiv-H1-wFD.normalTitle" = "Créer";
+
+/* Class = "UILabel"; text = "Summary"; ObjectID = "kHh-5R-Kno"; */
+"kHh-5R-Kno.text" = "Summary";
+
+/* Class = "UILabel"; text = "Créer le :"; ObjectID = "kcG-8K-cJc"; */
+"kcG-8K-cJc.text" = "Créer le :";
+
+/* Class = "UILabel"; text = "Titre"; ObjectID = "lp4-qh-Rap"; */
+"lp4-qh-Rap.text" = "Titre";
+
+/* Class = "UITextField"; placeholder = "Your Password"; ObjectID = "mCu-Yz-qCJ"; */
+"mCu-Yz-qCJ.placeholder" = "Your Password";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "oHS-Xp-K7H"; */
+"oHS-Xp-K7H.normalTitle" = "Log In";
+
+/* Class = "UILabel"; text = "Email : "; ObjectID = "q1u-84-27Y"; */
+"q1u-84-27Y.text" = "Email : ";
+
+/* Class = "UILabel"; text = "Content :"; ObjectID = "q6c-fG-BcK"; */
+"q6c-fG-BcK.text" = "Content :";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "tNM-Oy-utK"; */
+"tNM-Oy-utK.normalTitle" = "Register";
+
+/* Class = "UILabel"; text = "DateCreation"; ObjectID = "vMi-zd-Gn4"; */
+"vMi-zd-Gn4.text" = "DateCreation";
+
+/* Class = "UILabel"; text = "Password :"; ObjectID = "xmh-3T-hPy"; */
+"xmh-3T-hPy.text" = "Password :";
+
+/* Class = "UILabel"; text = "Summary :"; ObjectID = "y2d-8S-0NA"; */
+"y2d-8S-0NA.text" = "Summary :";
+
+/* Class = "UILabel"; text = "Dernière modification le :"; ObjectID = "yIi-wc-POO"; */
+"yIi-wc-POO.text" = "Dernière modification le :";

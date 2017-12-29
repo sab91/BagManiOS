@@ -10,7 +10,7 @@ import UIKit
 import SQLite
 
 class Bdd {
-    var DATABASE_VERSION: Int
+    //var DATABASE_VERSION: Int
     var DATABASE_NAME: String
     var database: Connection!
     let MODEL_NAME_PAGE: Table
@@ -30,8 +30,8 @@ class Bdd {
     
     // Constructeur
     init() {
-        self.DATABASE_NAME = "bagman.db"
-        self.DATABASE_VERSION = 1
+        self.DATABASE_NAME = "bagmandb"
+        //self.DATABASE_VERSION = 1
         self.MODEL_NAME_PAGE = Table("page")
         self.MODEL_NAME_CARNET = Table("carnet")
         self.MODEL_NAME_AUTH = Table("auth")
@@ -49,7 +49,7 @@ class Bdd {
         
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let fileUrl = documentDirectory.appendingPathComponent("users").appendingPathExtension("sqlite3")
+            let fileUrl = documentDirectory.appendingPathComponent(DATABASE_NAME).appendingPathExtension("sqlite3")
             let database = try Connection(fileUrl.path)
             self.database = database
             
@@ -120,8 +120,8 @@ class Bdd {
         
         do {
             try database.run(MODEL_NAME_AUTH.create { t in
-                t.column(id, primaryKey: true)
-                t.column(EMAIL)
+                //t.column(id, primaryKey: true)
+                t.column(EMAIL, primaryKey: true)
                 t.column(MDP)
                 t.column(CREATED_AT)
                 t.column(UPDATED_AT)

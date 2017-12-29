@@ -21,10 +21,9 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // initialisation de la bdd
+        // initialisation de la variable pour intéragir avec la db
         self.db = Bdd()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

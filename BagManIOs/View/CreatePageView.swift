@@ -21,11 +21,9 @@ class CreatePageView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // initialisation de la variable pour intéragir avec la db
         self.db = Bdd()
         
-        
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,7 +43,7 @@ class CreatePageView: UIViewController {
     func displayAlertMessage(userMessage: String) {
         let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { action in
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }
         
         myAlert.addAction(okAction)
