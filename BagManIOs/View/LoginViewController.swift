@@ -20,7 +20,18 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.navigationController?.navigationBar.barTintColor = .cyan
+        
+        self.userEmailTextField.layer.borderColor = UIColor.white.cgColor
+        self.userPasswordTextField.layer.borderColor = UIColor.white.cgColor
 
+        self.userEmailTextField.layer.borderWidth = 1.0
+        self.userPasswordTextField.layer.borderWidth = 1.0
+        
+        
+
+        
 //        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
 //        tap.cancelsTouchesInView = false
 //        self.view.addGestureRecognizer(tap)

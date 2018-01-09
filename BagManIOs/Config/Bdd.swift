@@ -10,6 +10,13 @@ import UIKit
 import SQLite
 
 class Bdd {
+    
+    // bdd cryptée
+//    var rc: Int32
+//    var db: OpaquePointer? = nil
+//    var stmt: OpaquePointer? = nil
+//    let password: String = "correct horse battery staple"
+    
     //var DATABASE_VERSION: Int
     var DATABASE_NAME: String
     var database: Connection!
@@ -24,7 +31,8 @@ class Bdd {
     let CREATED_AT = Expression<Date>("created_at")
     let UPDATED_AT = Expression<Date>("updated_at")
     let CARNET_ID = Expression<Int>("carnet_id")
-    let id = Expression<Int>("id")
+    let id_page = Expression<Int>("id_page")
+    let id_carnet = Expression<Int>("id_carnet")
     let EMAIL = Expression<String>("email")
     let MDP = Expression<String>("password")
     
@@ -47,6 +55,13 @@ class Bdd {
     // Création de la base de données
     func createDb() {
         
+////        rc = sqlite3_open(":memory:", &db)
+////        if (rc != SQLITE_OK) {
+////            let errmsg = String(cString: sqlite3_errmsg(db))
+////            NSLog("Error opening database: \(errmsg)")
+////            return
+//        }
+        
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileUrl = documentDirectory.appendingPathComponent(DATABASE_NAME).appendingPathExtension("sqlite3")
@@ -57,6 +72,7 @@ class Bdd {
         } catch {
             print(error)
         }
+        
         
     }
     
@@ -77,7 +93,7 @@ class Bdd {
     func createPageTable() {
         do {
             try database.run(MODEL_NAME_PAGE.create { t in
-                t.column(id, primaryKey: true)
+                t.column(id_page, primaryKey: true)
                 t.column(TITLE)
                 t.column(CONTENT)
                 t.column(SUMMARY)
@@ -85,7 +101,7 @@ class Bdd {
                 t.column(UPDATED_AT)
                 t.column(CARNET_ID)
                 //Tentative de création de clé étrangère
-                t.foreignKey(CARNET_ID, references: MODEL_NAME_CARNET, id)
+                t.foreignKey(CARNET_ID, references: MODEL_NAME_CARNET, id_carnet)
             })
 //            print("=====creation ", MODEL_NAME_PAGE)
         } catch {
@@ -101,7 +117,7 @@ class Bdd {
         
         do {
             try database.run(MODEL_NAME_CARNET.create { t in
-                t.column(id, primaryKey: true)
+                t.column(id_carnet, primaryKey: true)
                 t.column(NAME)
                 t.column(CREATED_AT)
                 t.column(UPDATED_AT)
@@ -125,7 +141,6 @@ class Bdd {
                 t.column(MDP)
                 t.column(CREATED_AT)
                 t.column(UPDATED_AT)
-                t.unique(EMAIL)
             })
 //            print("======creation ", MODEL_NAME_AUTH)
         } catch {
@@ -199,7 +214,7 @@ class Bdd {
     // Mettre à jour les données d'une page et modifier les données dans la bdd
     func updatePage(page: Page, id_p: Int) {
         
-        let data = self.MODEL_NAME_PAGE.filter(self.id == id_p)
+        let data = self.MODEL_NAME_PAGE.filter(self.id_page == id_p)
         let updateData = data.update(self.TITLE <- page.title, self.SUMMARY <- page.summary, self.CONTENT <- page.content, self.CREATED_AT <- page.createdAt, self.UPDATED_AT <- Date(), self.CARNET_ID <- page.carnet_id)
 
         do {
@@ -217,7 +232,7 @@ class Bdd {
        
         
         print(carnet.createdAt)
-        let data = self.MODEL_NAME_CARNET.filter(self.id == id_c)
+        let data = self.MODEL_NAME_CARNET.filter(self.id_carnet == id_c)
         let updateData = data.update(self.NAME <- carnet.name, self.CREATED_AT <- carnet.createdAt, self.UPDATED_AT <- Date(), self.EMAIL_ACCOUNT <- carnet.email)
 
         do {
@@ -237,17 +252,17 @@ class Bdd {
         
         var queryId: Int = 0
         do {
-            let query = MODEL_NAME_PAGE.select(id).filter(id == id_p)
+            let query = MODEL_NAME_PAGE.select(id_page).filter(id_page == id_p)
             let qr = try database.prepare(query)
             for q in qr {
                 //print("id: \(q[id])")
-                queryId = q[id]
+                queryId = q[id_page]
             }
         } catch {
             print(error)
         }
         
-        let data = self.MODEL_NAME_PAGE.filter(self.id == queryId)
+        let data = self.MODEL_NAME_PAGE.filter(self.id_page == queryId)
         let deleteUser = data.delete()
 
         do {
@@ -263,7 +278,7 @@ class Bdd {
         do{
             let query = try self.database.prepare(MODEL_NAME_PAGE.filter(CARNET_ID == carnet_id))
             for q in query {
-                let id_d = q[id]
+                let id_d = q[id_page]
                 deletePage(id_p: id_d)
             }
         } catch {
@@ -276,17 +291,17 @@ class Bdd {
         
         var queryId: Int = 0
         do {
-            let query = MODEL_NAME_CARNET.select(id).filter(id == id_c)
+            let query = MODEL_NAME_CARNET.select(id_carnet).filter(id_carnet == id_c)
             let qr = try database.prepare(query)
             for q in qr {
                 //print("id: \(q[id])")
-                queryId = q[id]
+                queryId = q[id_carnet]
             }
         } catch {
             print(error)
         }
         
-        let data = self.MODEL_NAME_CARNET.filter(self.id == queryId)
+        let data = self.MODEL_NAME_CARNET.filter(self.id_carnet == queryId)
         let deleteUser = data.delete()
 
         do {
@@ -393,7 +408,7 @@ class Bdd {
     func getPageRow(pageId_pf: Int) -> Page {
         var page: Page = Page(title_pf: "title", content_pf: "content", summary_pf: "summary", carnetId_pf: 0)
         do{
-            let query = try self.database.prepare(MODEL_NAME_PAGE.filter(id == pageId_pf))
+            let query = try self.database.prepare(MODEL_NAME_PAGE.filter(id_page == pageId_pf))
             for p in query {
                 page = DAO.objectToPage(cursor: p)
             }
@@ -408,7 +423,7 @@ class Bdd {
     func getCarnetRow(carnetId_pf: Int) -> Carnet {
         var carnet: Carnet = Carnet(name_pf: "name", email_pf: "email")
         do{
-            let query = try self.database.prepare(MODEL_NAME_CARNET.filter(id == carnetId_pf))
+            let query = try self.database.prepare(MODEL_NAME_CARNET.filter(id_carnet == carnetId_pf))
             for c in query {
                 carnet = DAO.objectToCarnet(cursor: c)
             }

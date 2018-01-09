@@ -178,7 +178,7 @@ class PageListView: UITableViewController, UISearchBarDelegate {
             do{
                 let query = try self.db.database.prepare(db.MODEL_NAME_PAGE.filter(db.TITLE == title))
                 for q in query {
-                    id = q[db.id]
+                    id = q[db.id_page]
                     titre = q[db.TITLE]
                     summary = q[db.SUMMARY]
                     content = q[db.CONTENT]

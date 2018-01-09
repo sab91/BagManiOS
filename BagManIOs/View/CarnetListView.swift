@@ -31,7 +31,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         
         // initialisation de la bdd
         self.db = Bdd()
-        
+//        db.deleteTables()
         
         alterView()
         
@@ -180,7 +180,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
             do{
                 let query = try self.db.database.prepare(db.MODEL_NAME_CARNET.filter(db.NAME == title))
                 for q in query {
-                    id = q[db.id]
+                    id = q[db.id_carnet]
                 }
             } catch {
                 print (error)
