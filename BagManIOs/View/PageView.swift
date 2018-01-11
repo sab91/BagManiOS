@@ -74,8 +74,13 @@ class PageView: UIViewController, UITextViewDelegate {
     // auto resize text view with content
     func adjustUITextViewHeight(arg : UITextView)
     {
-        arg.translatesAutoresizingMaskIntoConstraints = true
-        arg.sizeToFit()
+        
+        let fixedWidth = arg.frame.size.width
+        arg.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        let newSize = arg.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        var newFrame = arg.frame
+        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+        arg.frame = newFrame
     }
     
     

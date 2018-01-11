@@ -8,33 +8,29 @@
 
 import UIKit
 import SQLite
+import RNCryptor
 
 class Bdd {
     
-    // bdd cryptée
-//    var rc: Int32
-//    var db: OpaquePointer? = nil
-//    var stmt: OpaquePointer? = nil
-//    let password: String = "correct horse battery staple"
-    
+    let password = "sabri"
     //var DATABASE_VERSION: Int
     var DATABASE_NAME: String
     var database: Connection!
     let MODEL_NAME_PAGE: Table
     let MODEL_NAME_CARNET: Table
     let MODEL_NAME_AUTH: Table
-    let NAME = Expression<String>("name")
-    let EMAIL_ACCOUNT = Expression<String>("email_account")
-    let TITLE = Expression<String>("title")
-    let CONTENT = Expression<String>("content")
-    let SUMMARY = Expression<String>("summary")
+    let NAME = Expression<Data>("name")
+    let EMAIL_ACCOUNT = Expression<Data>("email_account")
+    let TITLE = Expression<Data>("title")
+    let CONTENT = Expression<Data>("content")
+    let SUMMARY = Expression<Data>("summary")
     let CREATED_AT = Expression<Date>("created_at")
     let UPDATED_AT = Expression<Date>("updated_at")
     let CARNET_ID = Expression<Int>("carnet_id")
     let id_page = Expression<Int>("id_page")
     let id_carnet = Expression<Int>("id_carnet")
-    let EMAIL = Expression<String>("email")
-    let MDP = Expression<String>("password")
+    let EMAIL = Expression<Data>("email")
+    let MDP = Expression<Data>("password")
     
     // Constructeur
     init() {
@@ -54,14 +50,7 @@ class Bdd {
 
     // Création de la base de données
     func createDb() {
-        
-////        rc = sqlite3_open(":memory:", &db)
-////        if (rc != SQLITE_OK) {
-////            let errmsg = String(cString: sqlite3_errmsg(db))
-////            NSLog("Error opening database: \(errmsg)")
-////            return
-//        }
-        
+
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileUrl = documentDirectory.appendingPathComponent(DATABASE_NAME).appendingPathExtension("sqlite3")
@@ -150,12 +139,47 @@ class Bdd {
     
     
     
+    ///++++++
+    
+    func crypter(string: String) -> Data {
+        
+        // Encryption
+//        let myString: String = "aaa"
+        //NSData * data = [myString, dataUsingEncoding: NSUTF8StringEncoding]
+        let str = string.data(using: .utf8)
+        let ciphertext = RNCryptor.encrypt(data: str!, withPassword: password)
+        
+        
+        return ciphertext
+    }
+    
+    func decrypt(donnee: Data) -> String {
+
+        var string: String = ""
+        // Decryption
+        do {
+            let originalData = try RNCryptor.decrypt(data: donnee, withPassword: password)
+            string = String(data: originalData, encoding: .utf8)!
+
+        } catch {
+            print(error)
+        }
+        return string
+    }
+    
+    //+++++++
+    
     // =============== Insert =====================
     
     // Insertion d'une page dans la bdd
     func insertPage(page: Page) {
-        let insertTable =  self.MODEL_NAME_PAGE.insert(TITLE <- page.title, SUMMARY <- page.summary, CONTENT <- page.content, CREATED_AT <- page.createdAt, UPDATED_AT <- page.updatedAt, CARNET_ID <- page.carnet_id)
+        let titleCrypt = crypter(string: page.title)
+        let summaryCrypt = crypter(string: page.summary)
+        let contentCrypt = crypter(string: page.content)
+
+        let insertTable =  self.MODEL_NAME_PAGE.insert(TITLE <- titleCrypt , SUMMARY <- summaryCrypt , CONTENT <- contentCrypt , CREATED_AT <- page.createdAt, UPDATED_AT <- page.updatedAt, CARNET_ID <- page.carnet_id)
         
+       
         do {
             try self.database.run(insertTable)
             print("new page inserted")
@@ -167,7 +191,9 @@ class Bdd {
     
     // Insertion d'un carnet dans la base
     func insertCarnet(carnet: Carnet) {
-        let insertTable =  self.MODEL_NAME_CARNET.insert(NAME <- carnet.name, CREATED_AT <- carnet.createdAt, UPDATED_AT <- carnet.updatedAt, EMAIL_ACCOUNT <- carnet.email)
+        let nameCrypt = crypter(string: carnet.name)
+        let emailCrypt = crypter(string: carnet.email)
+        let insertTable =  self.MODEL_NAME_CARNET.insert(NAME <- nameCrypt, CREATED_AT <- carnet.createdAt, UPDATED_AT <- carnet.updatedAt, EMAIL_ACCOUNT <- emailCrypt)
         
         do {
             try self.database.run(insertTable)
@@ -179,7 +205,9 @@ class Bdd {
     
     // Insérer un nouveau compte dans la bdd
     func insertAccount(email: String, password: String) {
-        let insertTable =  self.MODEL_NAME_AUTH.insert(EMAIL <- email, MDP <- password, CREATED_AT <- Date(), UPDATED_AT <- Date())
+        let emailCrypt = crypter(string: email)
+        let mdpCrypt = crypter(string: password)
+        let insertTable =  self.MODEL_NAME_AUTH.insert(EMAIL <- emailCrypt, MDP <- mdpCrypt, CREATED_AT <- Date(), UPDATED_AT <- Date())
         
         do {
             try self.database.run(insertTable)
@@ -195,9 +223,12 @@ class Bdd {
     // ================ Update ====================
     // Mettre à jour un compte dans la bdd
     func updateAccount(email: String, mdp: String) {
-        
-        let data = self.MODEL_NAME_AUTH.filter(self.EMAIL == email)
-        let updateData = data.update(EMAIL <- self.EMAIL, MDP <- mdp, CREATED_AT <- self.CREATED_AT, UPDATED_AT <- Date())
+
+        let emailCrypt = crypter(string: email)
+        let mdpCrypt = crypter(string: mdp)
+
+        let data = self.MODEL_NAME_AUTH.filter(self.EMAIL == emailCrypt)
+        let updateData = data.update(EMAIL <- emailCrypt, MDP <- mdpCrypt, CREATED_AT <- self.CREATED_AT, UPDATED_AT <- Date())
         
         do {
             try self.database.run(updateData)
@@ -209,13 +240,15 @@ class Bdd {
     
     
     
-    
-    
     // Mettre à jour les données d'une page et modifier les données dans la bdd
     func updatePage(page: Page, id_p: Int) {
         
+        let titleCrypt = crypter(string: page.title)
+        let summaryCrypt = crypter(string: page.summary)
+        let contentCrypt = crypter(string: page.content)
+        
         let data = self.MODEL_NAME_PAGE.filter(self.id_page == id_p)
-        let updateData = data.update(self.TITLE <- page.title, self.SUMMARY <- page.summary, self.CONTENT <- page.content, self.CREATED_AT <- page.createdAt, self.UPDATED_AT <- Date(), self.CARNET_ID <- page.carnet_id)
+        let updateData = data.update(self.TITLE <- titleCrypt, self.SUMMARY <- summaryCrypt, self.CONTENT <- contentCrypt, self.CREATED_AT <- page.createdAt, self.UPDATED_AT <- Date(), self.CARNET_ID <- page.carnet_id)
 
         do {
             try self.database.run(updateData)
@@ -228,12 +261,12 @@ class Bdd {
     
     // Mettre à jour les données d'un carnet et modifier les données dans la bdd
     func updateCarnet(carnet: Carnet, id_c: Int) {
-        print("fonction update")
-       
         
-        print(carnet.createdAt)
+        let nameCrypt = crypter(string: carnet.name)
+        let emailCrypt = crypter(string: carnet.email)
+
         let data = self.MODEL_NAME_CARNET.filter(self.id_carnet == id_c)
-        let updateData = data.update(self.NAME <- carnet.name, self.CREATED_AT <- carnet.createdAt, self.UPDATED_AT <- Date(), self.EMAIL_ACCOUNT <- carnet.email)
+        let updateData = data.update(self.NAME <- nameCrypt, self.CREATED_AT <- carnet.createdAt, self.UPDATED_AT <- Date(), self.EMAIL_ACCOUNT <- emailCrypt)
 
         do {
             try self.database.run(updateData)
@@ -313,8 +346,8 @@ class Bdd {
     
     // Supprimer un compte dans la bdd
     func deleteAccount(email: String) {
-        
-        let data = self.MODEL_NAME_AUTH.filter(self.EMAIL == email)
+        let email = email.data(using: .utf8)
+        let data = self.MODEL_NAME_AUTH.filter(self.EMAIL == email!)
         let deleteUser = data.delete()
         
         do {
@@ -389,14 +422,18 @@ class Bdd {
     // Afficher le contenu de la table carnet
     func getListCarnet(email: String) -> [Carnet] {
         var tabCarnet: [Carnet] = []
+        
         do {
-            let carnets = try self.database.prepare(self.MODEL_NAME_CARNET.filter(EMAIL_ACCOUNT == email))
+            let carnets = try self.database.prepare(self.MODEL_NAME_CARNET)
             for carnet in carnets {
-                tabCarnet.append(DAO.objectToCarnet(cursor: carnet))
+                if decrypt(donnee: carnet[EMAIL_ACCOUNT]) == email {
+                    tabCarnet.append(DAO.objectToCarnet(cursor: carnet))
+                }
             }
         } catch {
             print(error)
         }
+        
         return tabCarnet
     }
 

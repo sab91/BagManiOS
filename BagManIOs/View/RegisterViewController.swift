@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import RNCryptor
 
 class RegisterViewController: UIViewController {
 
@@ -35,6 +36,7 @@ class RegisterViewController: UIViewController {
         let userEmail = userEmailTextField.text
         let userPassword = userPasswordTextField.text
         let repeatPassword = repeatPasswordTextField.text
+        var emailExist = false
         
         // Check empty fields
         if((userEmail?.isEmpty)! || (userPassword?.isEmpty)! || (repeatPassword?.isEmpty)!) {
@@ -51,9 +53,22 @@ class RegisterViewController: UIViewController {
         
         // Store data
         do {
-            let query = try self.db.database.scalar(db.MODEL_NAME_AUTH.filter(db.EMAIL == userEmail!).count)
-            print(query)
-            if query > 0 {
+            let query = try self.db.database.prepare(db.MODEL_NAME_AUTH)
+            for q in query {
+                // décypter les email de la bdd
+                print("====", q[db.EMAIL])
+                let fk = q[db.EMAIL]
+                let email = try RNCryptor.decrypt(data: fk, withPassword: "sabri")
+                let emails = String(data: email, encoding: .utf8)
+                print("====", email)
+                if emails == userEmail {
+                    emailExist = true
+                    print("===", emailExist)
+                    debugPrint(emailExist)
+                }
+             }
+            
+            if emailExist {
                 displayAlertMessage(userMessage: "Email already exist")
             } else {
                 let myAlert = UIAlertController(title: "Alert", message: "Registration is successful. Thank you !", preferredStyle: UIAlertControllerStyle.alert)

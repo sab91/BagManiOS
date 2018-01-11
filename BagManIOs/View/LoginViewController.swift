@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import RNCryptor
 
 class LoginViewController: UIViewController {
     
@@ -49,6 +50,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginButton(_ sender: Any) {
         let userEmail = userEmailTextField.text
         let userPassword = userPasswordTextField.text
+        var emailExist = false
         
         var dbemail = ""
         var dbmdp = ""
@@ -64,17 +66,16 @@ class LoginViewController: UIViewController {
         
         
         do {
-            
-            if try self.db.database.scalar(db.MODEL_NAME_AUTH.filter(db.EMAIL == userEmail!).count) > 0 {
-                let secondQuery = try self.db.database.prepare(db.MODEL_NAME_AUTH.filter(db.EMAIL == userEmail!))
-//                print(query)
-                for row in secondQuery {
-                    dbemail = row[db.EMAIL]
-                    dbmdp = row[db.MDP]
-//                    dbcreation = row[db.CREATED_AT]
-//                    dbupdate = row[db.UPDATED_AT]
+            let query = try self.db.database.prepare(db.MODEL_NAME_AUTH)
+            for q in query {
+                // décypter les email de la bdd
+                if db.decrypt(donnee: q[db.EMAIL]) == userEmail {
+                    emailExist = true
+                    dbemail = db.decrypt(donnee: q[db.EMAIL])
+                    dbmdp = db.decrypt(donnee: q[db.MDP])
                 }
-                
+            }
+            if emailExist {
                 if (userEmail == dbemail && userPassword == dbmdp) {
                     let myAlert = UIAlertController(title: "Alert", message: "Authentification successful. You're logged", preferredStyle: UIAlertControllerStyle.alert)
                     let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { action in

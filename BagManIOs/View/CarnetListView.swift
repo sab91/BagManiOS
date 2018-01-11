@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import RNCryptor
 
 class CarnetListView: UITableViewController, UISearchBarDelegate {
     var carnet: [Carnet] = []
@@ -18,6 +19,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
     var db: Bdd!
     var idCell: [Int] = []
     var currentEmail: String = ""
+    let password = "sabri"
     
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -177,14 +179,27 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         var id = 0
         guard let pageListView = segue.destination as? PageListView else {return}
         if let cell = sender as? UITableViewCell, let title = cell.textLabel?.text {
+            
+//            do {
+//
+//            } catch {
+//                print(error)
+//            }
+            
             do{
-                let query = try self.db.database.prepare(db.MODEL_NAME_CARNET.filter(db.NAME == title))
+                let query = try self.db.database.prepare(db.MODEL_NAME_CARNET)
                 for q in query {
-                    id = q[db.id_carnet]
+                    if db.decrypt(donnee: q[db.NAME]) == title {
+                        id = q[db.id_carnet]
+                        print("comparaison ok")
+                        print(id)
+                    }
                 }
             } catch {
                 print (error)
             }
+            
+            
             pageListView.carnet_id = id
         }
     }

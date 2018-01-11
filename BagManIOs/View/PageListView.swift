@@ -8,8 +8,10 @@
 
 import UIKit
 import SQLite
+import RNCryptor
 
 class PageListView: UITableViewController, UISearchBarDelegate {
+    let password = "sabri"
     var page: [Page] = []
     var currentPage: [Page] = []
     var carnet_id: Int!
@@ -57,6 +59,7 @@ class PageListView: UITableViewController, UISearchBarDelegate {
             print("=====current email: ", currentEmail)
             UserDefaults.standard.set(carnet_id, forKey: "idCarnet")
             page = db.getPagesByCarnet(carnetId_pf: carnet_id)
+            dump(db.getListPage())
             currentPage = page
             tableView.reloadData()
         }
@@ -166,34 +169,35 @@ class PageListView: UITableViewController, UISearchBarDelegate {
     // Cette fonction permet de transmettre des données vers une autre View
     // Ici on transmet les valeurs de la page pour que son contenue soit affiché dans la vue suivante
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var id = 0
-        var titre: String!
-        var content: String!
-        var summary: String!
-        var createdAt: Date!
-        var updatedAt: Date!
+        var idPageToSegue = 0
         
         guard let pageView = segue.destination as? PageView else {return}
         if let cell = sender as? UITableViewCell, let title = cell.textLabel?.text {
+            
             do{
-                let query = try self.db.database.prepare(db.MODEL_NAME_PAGE.filter(db.TITLE == title))
+                let query = try self.db.database.prepare(db.MODEL_NAME_PAGE)
                 for q in query {
-                    id = q[db.id_page]
-                    titre = q[db.TITLE]
-                    summary = q[db.SUMMARY]
-                    content = q[db.CONTENT]
-                    createdAt = q[db.CREATED_AT]
-                    updatedAt = q[db.UPDATED_AT]
+                    print("Title store in bdd =====", q[db.TITLE])
+                    let fk = db.decrypt(donnee: q[db.TITLE])
+                    if fk == title {
+                        idPageToSegue = q[db.id_page]
+                    }
+                    print("Title decrypted from bdd =====",fk)
                 }
+                
             } catch {
                 print (error)
             }
-            pageView.id_page = id
-            pageView.titre = titre
-            pageView.summary = summary
-            pageView.content = content
-            pageView.createAt = createdAt
-            pageView.updatedAt = updatedAt
+            
+            let pageSegue = db.getPageRow(pageId_pf: idPageToSegue)
+            
+            
+            pageView.id_page = idPageToSegue
+            pageView.titre = pageSegue.title
+            pageView.summary = pageSegue.summary
+            pageView.content = pageSegue.content
+            pageView.createAt = pageSegue.createdAt
+            pageView.updatedAt = pageSegue.updatedAt
         }
     }
     
