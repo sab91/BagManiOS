@@ -1,7 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:../IQKeyboardManager-master/IQKeyboardManagerSwift"
+      name = "IQKeyboardManagerSwift">
+      <Group
+         location = "group:IQTextView"
+         name = "IQTextView">
+         <FileRef
+            location = "group:IQTextView.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:IQToolbar"
+         name = "IQToolbar">
+         <FileRef
+            location = "group:IQPreviousNextView.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQTitleBarButtonItem.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQBarButtonItem.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQToolbar.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQUIView+IQKeyboardToolbar.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Constants"
+         name = "Constants">
+         <FileRef
+            location = "group:IQKeyboardManagerConstantsInternal.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQKeyboardManagerConstants.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Resources"
+         name = "Resources">
+         <FileRef
+            location = "group:IQKeyboardManager.bundle">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:IQKeyboardReturnKeyHandler.swift">
+      </FileRef>
+      <FileRef
+         location = "group:IQKeyboardManager.swift">
+      </FileRef>
+      <FileRef
+         location = "group:IQKeyboardManagerSwift.h">
+      </FileRef>
+      <Group
+         location = "group:Categories"
+         name = "Categories">
+         <FileRef
+            location = "group:IQUIWindow+Hierarchy.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQUIScrollView+Additions.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQUIViewController+Additions.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQUITextFieldView+Additions.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQUIView+Hierarchy.swift">
+         </FileRef>
+         <FileRef
+            location = "group:IQNSArray+Sort.swift">
+         </FileRef>
+      </Group>
+   </Group>
    <FileRef
-      location = "self:BagManIOs.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>
