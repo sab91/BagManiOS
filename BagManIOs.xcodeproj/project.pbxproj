@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0C22A12007E81700D55BA3 /* RNCryptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E820B2D2007DA2F006893E2 /* RNCryptor.framework */; };
+		1E0C22A92007E81F00D55BA3 /* RNCryptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E820B2D2007DA2F006893E2 /* RNCryptor.framework */; };
+		1E0C22AA2007E81F00D55BA3 /* RNCryptor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E820B2D2007DA2F006893E2 /* RNCryptor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E0C22AD2007E82400D55BA3 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E820B412007DA3E006893E2 /* SQLite.framework */; };
+		1E0C22AE2007E82900D55BA3 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E820B412007DA3E006893E2 /* SQLite.framework */; };
+		1E0C22AF2007E82900D55BA3 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E820B412007DA3E006893E2 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E0EC1441FF27F1300449C4C /* CreateCarnetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0EC1431FF27F1300449C4C /* CreateCarnetView.swift */; };
 		1E0EC1461FF27F3100449C4C /* CreatePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0EC1451FF27F3100449C4C /* CreatePageView.swift */; };
 		1E323AFE1FEC491F0059999F /* PageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E323AFD1FEC491F0059999F /* PageListView.swift */; };
@@ -46,6 +52,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1E0C22AB2007E81F00D55BA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E820B242007DA2F006893E2 /* RNCryptor.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FB627FCD1B2B7A1700C3A579;
+			remoteInfo = RNCryptor;
+		};
+		1E0C22B02007E82900D55BA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E820B362007DA3E006893E2 /* SQLite.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EE247AD21C3F04ED00AE3E12;
+			remoteInfo = "SQLite iOS";
+		};
 		1E820B2C2007DA2F006893E2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1E820B242007DA2F006893E2 /* RNCryptor.xcodeproj */;
@@ -153,6 +173,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				1E0C22AF2007E82900D55BA3 /* SQLite.framework in Embed Frameworks */,
+				1E0C22AA2007E81F00D55BA3 /* RNCryptor.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +236,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E0C22AD2007E82400D55BA3 /* SQLite.framework in Frameworks */,
+				1E0C22A92007E81F00D55BA3 /* RNCryptor.framework in Frameworks */,
+				1E0C22AE2007E82900D55BA3 /* SQLite.framework in Frameworks */,
+				1E0C22A12007E81700D55BA3 /* RNCryptor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +474,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				1E0C22AC2007E81F00D55BA3 /* PBXTargetDependency */,
+				1E0C22B12007E82900D55BA3 /* PBXTargetDependency */,
 			);
 			name = BagManIOs;
 			productName = BagManIOs;
@@ -728,6 +756,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1E0C22AC2007E81F00D55BA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RNCryptor;
+			targetProxy = 1E0C22AB2007E81F00D55BA3 /* PBXContainerItemProxy */;
+		};
+		1E0C22B12007E82900D55BA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SQLite iOS";
+			targetProxy = 1E0C22B02007E82900D55BA3 /* PBXContainerItemProxy */;
+		};
 		558033311FE2E6FD00F1C3A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 558033171FE2E6FD00F1C3A2 /* BagManIOs */;
