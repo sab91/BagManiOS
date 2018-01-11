@@ -60,7 +60,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
             currentEmail = UserDefaults.standard.string(forKey: "currentEmail")!
             print("=====current email: ", currentEmail)
             carnet = db.getListCarnet(email: currentEmail)
-            page = db.getListPage()
+//            page = db.getListPage()
             currentCarnet = carnet
             tableView.reloadData()
         }
@@ -180,19 +180,12 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         guard let pageListView = segue.destination as? PageListView else {return}
         if let cell = sender as? UITableViewCell, let title = cell.textLabel?.text {
             
-//            do {
-//
-//            } catch {
-//                print(error)
-//            }
             
             do{
                 let query = try self.db.database.prepare(db.MODEL_NAME_CARNET)
                 for q in query {
                     if db.decrypt(donnee: q[db.NAME]) == title {
                         id = q[db.id_carnet]
-                        print("comparaison ok")
-                        print(id)
                     }
                 }
             } catch {
@@ -236,21 +229,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
         
     }
     
-    
-    /////// test affichage =======================
-    func displayPage(tabPage: [Page]) {
-        for page in tabPage {
-            print(page.toString())
-        }
-    }
-    
-    
-    func displayCarnet(tabCarnet: [Carnet]) {
-        for carnet in tabCarnet{
-            print(carnet.toString())
-        }
-    }
-    
+
 
     
 }
