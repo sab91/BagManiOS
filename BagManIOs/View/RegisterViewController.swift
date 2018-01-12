@@ -22,6 +22,14 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // border design on text field
+        self.userEmailTextField.layer.borderColor = UIColor.white.cgColor
+        self.userPasswordTextField.layer.borderColor = UIColor.white.cgColor
+        self.repeatPasswordTextField.layer.borderColor = UIColor.white.cgColor
+        self.userEmailTextField.layer.borderWidth = 1.0
+        self.userPasswordTextField.layer.borderWidth = 1.0
+        self.repeatPasswordTextField.layer.borderWidth = 1.0
+        
         // initialisation de la variable pour intéragir avec la db
         self.db = Bdd()
 

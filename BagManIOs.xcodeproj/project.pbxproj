@@ -36,6 +36,7 @@
 		1E3756AB2007E45E0054977C /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E37568E2007E45E0054977C /* IQNSArray+Sort.swift */; };
 		1E45644A1FF179E7003C8EF3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4564491FF179E7003C8EF3 /* RegisterViewController.swift */; };
 		1E4564521FF1AE4A003C8EF3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4564511FF1AE4A003C8EF3 /* LoginViewController.swift */; };
+		1E8A997A2008F3BC00A7560F /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A99792008F3BC00A7560F /* BaseModel.swift */; };
 		1EC4E21B1FE6D5980010A964 /* Bdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC4E21A1FE6D5980010A964 /* Bdd.swift */; };
 		1EED1A411FEA8AC400B118E4 /* CarnetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED1A401FEA8AC400B118E4 /* CarnetListView.swift */; };
 		1EED1A491FEAA95500B118E4 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED1A481FEAA95500B118E4 /* DAO.swift */; };
@@ -46,7 +47,6 @@
 		558033291FE2E6FD00F1C3A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558033271FE2E6FD00F1C3A2 /* LaunchScreen.storyboard */; };
 		558033341FE2E6FD00F1C3A2 /* BagManIOsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558033331FE2E6FD00F1C3A2 /* BagManIOsTests.swift */; };
 		5580333F1FE2E6FD00F1C3A2 /* BagManIOsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5580333E1FE2E6FD00F1C3A2 /* BagManIOsUITests.swift */; };
-		5580334D1FE2E7EE00F1C3A2 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5580334C1FE2E7EE00F1C3A2 /* BaseModel.swift */; };
 		5580334F1FE2E80200F1C3A2 /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5580334E1FE2E80200F1C3A2 /* Carnet.swift */; };
 		558033511FE2E80B00F1C3A2 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558033501FE2E80B00F1C3A2 /* Page.swift */; };
 /* End PBXBuildFile section */
@@ -208,6 +208,7 @@
 		1E4564511FF1AE4A003C8EF3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E820B242007DA2F006893E2 /* RNCryptor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCryptor.xcodeproj; path = "RNCryptor-master/RNCryptor.xcodeproj"; sourceTree = "<group>"; };
 		1E820B362007DA3E006893E2 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
+		1E8A99792008F3BC00A7560F /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		1EC4E21A1FE6D5980010A964 /* Bdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bdd.swift; sourceTree = "<group>"; };
 		1EED1A401FEA8AC400B118E4 /* CarnetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarnetListView.swift; sourceTree = "<group>"; };
 		1EED1A481FEAA95500B118E4 /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
@@ -226,7 +227,6 @@
 		5580333A1FE2E6FD00F1C3A2 /* BagManIOsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BagManIOsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5580333E1FE2E6FD00F1C3A2 /* BagManIOsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagManIOsUITests.swift; sourceTree = "<group>"; };
 		558033401FE2E6FD00F1C3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5580334C1FE2E7EE00F1C3A2 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		5580334E1FE2E80200F1C3A2 /* Carnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carnet.swift; sourceTree = "<group>"; };
 		558033501FE2E80B00F1C3A2 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -377,7 +377,7 @@
 		1EC4E2111FE6D4460010A964 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5580334C1FE2E7EE00F1C3A2 /* BaseModel.swift */,
+				1E8A99792008F3BC00A7560F /* BaseModel.swift */,
 				5580334E1FE2E80200F1C3A2 /* Carnet.swift */,
 				558033501FE2E80B00F1C3A2 /* Page.swift */,
 				1EED1A481FEAA95500B118E4 /* DAO.swift */,
@@ -726,9 +726,9 @@
 				1E0EC1441FF27F1300449C4C /* CreateCarnetView.swift in Sources */,
 				1E323B041FEC85B90059999F /* PageView.swift in Sources */,
 				1E37569E2007E45E0054977C /* IQBarButtonItem.swift in Sources */,
-				5580334D1FE2E7EE00F1C3A2 /* BaseModel.swift in Sources */,
 				1E4564521FF1AE4A003C8EF3 /* LoginViewController.swift in Sources */,
 				1E37569D2007E45E0054977C /* IQTitleBarButtonItem.swift in Sources */,
+				1E8A997A2008F3BC00A7560F /* BaseModel.swift in Sources */,
 				1E0EC1461FF27F3100449C4C /* CreatePageView.swift in Sources */,
 				1E3756AB2007E45E0054977C /* IQNSArray+Sort.swift in Sources */,
 				1E3756A02007E45E0054977C /* IQUIView+IQKeyboardToolbar.swift in Sources */,

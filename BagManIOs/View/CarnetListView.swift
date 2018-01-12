@@ -89,7 +89,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // #warning Incomplete implementation, return the number of rows
-        return "Liste des carnets"
+        return "Carnets List"
     }
     
     
@@ -209,7 +209,7 @@ class CarnetListView: UITableViewController, UISearchBarDelegate {
     func alterView() {
         tableView.tableHeaderView = UIView()
         navigationItem.titleView = searchBar
-        searchBar.placeholder = "Rechercher un carnet"
+        searchBar.placeholder = "Search a carnet"
     }
     
     // Filtrage des données en fonction de la recherche tapée

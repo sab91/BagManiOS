@@ -81,7 +81,7 @@ class PageListView: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // #warning Incomplete implementation, return the number of rows
-        return "Liste des pages"
+        return "Pages List"
     }
     
     
@@ -91,7 +91,7 @@ class PageListView: UITableViewController, UISearchBarDelegate {
         cell.textLabel?.text = "\(currentPage[indexPath.row].title)"
 //        print(indexPath.section)
 //        print(indexPath.row)
-        cell.detailTextLabel?.text = "Dernière mis à jour le : \(currentPage[indexPath.row].updatedAt)"
+        cell.detailTextLabel?.text = "\(currentPage[indexPath.row].summary)"
         
         
         return cell
@@ -213,7 +213,7 @@ class PageListView: UITableViewController, UISearchBarDelegate {
     func alterView() {
         tableView.tableHeaderView = UIView()
         navigationItem.titleView = searchBar
-        searchBar.placeholder = "Rechercher une Page"
+        searchBar.placeholder = "Search a page"
     }
     
     // Filtrage des données en fonction de la recherche tapée
