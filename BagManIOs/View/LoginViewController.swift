@@ -27,8 +27,8 @@ class LoginViewController: UIViewController {
         // border design on text field
         self.userEmailTextField.layer.borderColor = UIColor.white.cgColor
         self.userPasswordTextField.layer.borderColor = UIColor.white.cgColor
-        self.userEmailTextField.layer.borderWidth = 1.0
-        self.userPasswordTextField.layer.borderWidth = 1.0
+        self.userEmailTextField.layer.borderWidth = 2.0
+        self.userPasswordTextField.layer.borderWidth = 2.0
         
         
 
