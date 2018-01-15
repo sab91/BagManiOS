@@ -24,8 +24,11 @@ class RegisterViewController: UIViewController {
         
         // border design on text field
         self.userEmailTextField.layer.borderColor = UIColor.white.cgColor
+        self.userEmailTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         self.userPasswordTextField.layer.borderColor = UIColor.white.cgColor
+        self.userPasswordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         self.repeatPasswordTextField.layer.borderColor = UIColor.white.cgColor
+        self.repeatPasswordTextField.attributedPlaceholder = NSAttributedString(string: "Confirm Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         self.userEmailTextField.layer.borderWidth = 1.0
         self.userPasswordTextField.layer.borderWidth = 1.0
         self.repeatPasswordTextField.layer.borderWidth = 1.0

@@ -22,6 +22,11 @@ class CreateCarnetView: UIViewController {
         // initialisation de la variable pour intéragir avec la db
         self.db = Bdd()
         
+        self.titreCarnetTextField.layer.borderWidth = 2.0
+        self.titreCarnetTextField.layer.borderColor = UIColor.white.cgColor
+        self.titreCarnetTextField.attributedPlaceholder = NSAttributedString(string: "Titre", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -24,6 +24,13 @@ class CreatePageView: UIViewController {
         // initialisation de la variable pour intéragir avec la db
         self.db = Bdd()
         
+        self.titlePageTextField.layer.borderColor = UIColor.white.cgColor
+        self.titlePageTextField.attributedPlaceholder = NSAttributedString(string: "Titre", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        self.summaryPageTextField.layer.borderColor = UIColor.white.cgColor
+        self.summaryPageTextField.attributedPlaceholder = NSAttributedString(string: "Summary", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        self.titlePageTextField.layer.borderWidth = 2.0
+        self.summaryPageTextField.layer.borderWidth = 2.0
+        
     }
 
     override func didReceiveMemoryWarning() {
