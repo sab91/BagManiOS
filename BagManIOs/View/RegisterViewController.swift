@@ -54,6 +54,8 @@ class RegisterViewController: UIViewController {
             // Display message alert
             displayAlertMessage(userMessage: "All field are required")
             return
+        } else if (userPasswordTextField.text?.count)! <= 8 {
+            displayAlertMessage(userMessage: "Password must have more than 8 characters")
         }
         
         if (userPassword != repeatPassword) {

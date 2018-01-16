@@ -59,12 +59,14 @@ class LoginViewController: UIViewController {
 //        var dbcreation = Date()
 //        var dbupdate = Date()
         
+        
+        
         // Check empty fields
         if((userEmail?.isEmpty)! || (userPassword?.isEmpty)!) {
             // Display message alert
             displayAlertMessage(userMessage: "All field are required")
             return
-        }
+        } 
         
         
         do {
